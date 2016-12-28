@@ -1,0 +1,12 @@
+/*******************************************************
+*
+* written 12-28-2016
+* Xuxinting
+*
+*******************************************************/
+This project is designed as a auto-control system that can be used to water flowers.
+The control board is RaspberryPi Model 3B.
+Three water pumps are used as the implement.
+Both the Android control terminal and the control board are connected to the ethernet.
+The potential result is that I can use my phone to control all the devices and warning messages will be sent to my phone under certain circumstance.
+A public server is used to store data and as a transaction between the phone and the board.
