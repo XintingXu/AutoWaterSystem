@@ -64,7 +64,8 @@
 			echo "Jump to the page in 5 seconds.<br>";
 			sleep(5);
 			mysqli_close($conn);
-			header("Location:http://www.xuxinting.cn/AutoWaterSystem/init.php");
+			$domain_name = DOMAIN_NAME;
+			header("Location:http://$domain_name/init.php");
 			exit;
 		}
 		else{//返回值需要进一步判断
@@ -93,7 +94,8 @@
 				echo "Jump to the page in 5 seconds.<br>";
 				sleep(5);
 				mysqli_close($conn);
-				header("Location:http://www.xuxinting.cn/AutoWaterSystem/init.php");
+				$domain_name = DOMAIN_NAME;
+				header("Location:http://$domain_name/init.php");
 				exit;
 			}
 			else{

@@ -17,11 +17,14 @@ define('DATA_HOST_PASS','VliPhMbj4oCVv5B3');
 //定义数据库名
 define('DATA_HOST_DBNAME','AutoWaterSystem');
 
+//定义应用的域名
+define('DOMAIN_NAME','www.xuxinting.cn/AutoWaterSystem');
+
 //定义图片存储路径
-define('STO_PATH',"localhost/AutoWaterSystem/upload");
+define('STO_PATH',"./upload/");
 
 //定义是否采用云存储，
-define('STO_SINACLOUD','NO');
+define('STO_SINACLOUD',false);
 
 //云存储用户名
 define('STO_USERPASS','');
@@ -40,3 +43,9 @@ define('NAME_OF_TABLE_SENSORLOG','sensor_log');
 
 //定义初始的占位用户ID编号
 define('ROOT_USED_ID','100000000');
+
+//定义数据库初始化时的初始用户名
+define('ROOT_USED_NAME','xuxitning');
+
+//定义数据库初始化时的初始密码
+define('ROOT_USED_PASS','1199552233');

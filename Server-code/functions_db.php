@@ -73,7 +73,7 @@ require_once('config.php');
 			$i++;
 		}
 		
-		$sql = "SELECT $string_rows FROM $table_name WHERE $constrain";
+		$sql = "SELECT $string_rows FROM $table_name WHERE $constrain;";
 		
 		if(DEBUG_MODE)
 			echo $sql."<br>";

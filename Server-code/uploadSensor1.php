@@ -58,7 +58,7 @@ sensor_type 为1，表示数值型传感器。
 			"log_datetime"=>$upload_time);
 			
 			$RESULT = db_update($table_sensor,$ROWS_sensor_info,
-				"$table_sensor.sensor_id='$sensor_id' AND $table_sensor.user_id='$user_id' AND $table_sensor.sensor_type='1';");
+				"$table_sensor.sensor_id='$sensor_id' AND $table_sensor.user_id='$user_id' AND $table_sensor.sensor_type='1'");
 				
 			if(DEBUG_MODE){
 				echo "UPDATE Sensor \$RESULT = $RESULT<br>";

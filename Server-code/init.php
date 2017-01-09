@@ -9,8 +9,8 @@ require_once('functions_calcu.php');
 
 //引入参数
 $ROOT_USERD_ID = ROOT_USED_ID;
-$ROOT_USER_NAME = 'xuxinting';
-$ROOT_USER_PASSWORD = '1199552233';
+$ROOT_USER_NAME = ROOT_USED_NAME;
+$ROOT_USER_PASSWORD = ROOT_USED_PASS;
 
 $ROOT_USER_REGDATE = date("Y-m-d H:i:s");
 if(DEBUG_MODE)
@@ -113,6 +113,7 @@ mysqli_close($conn);
 echo "Jump to the Index in 5 seconds.<br>";
 sleep(5);
 
-header("Location:http://www.xuxinting.cn/AutoWaterSystem/"); 
+$domain_name = DOMAIN_NAME;
+header("Location:http://$domain_name/"); 
 exit;
 ?>

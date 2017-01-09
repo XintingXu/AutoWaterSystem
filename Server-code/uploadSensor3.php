@@ -1,12 +1,20 @@
 <?php
 /*
-sensor_type 为2，表示开关型传感器。
-0表示关，1表示开
+sensor_type 为3，表示图像型传感器。
+
+图像原始数据经过BASE64编码后传输，
 */
+
+header('Content-type: text/json; charset=UTF-8');
+
+$base64 = $_POST["image"]; // 得到文件参数
+$img = base64_decode($base64); // 将格式为base64的字符串解码
+
+//$path = "md5(uniqid(rand()))".".jpg"; // 产生随机唯一的名字作为文件名
+//file_put_contents($path, $img); // 将图片保存到相应位置
 
 	//获取POST和GET的数据参数
 	$sensor_id = $_GET['sensor_id'];
-	$sensor_status = $_GET['sensor_status'];
 	if(DEBUG_MODE){
 		$user_id = $_GET['user_id'];
 		$user_key = $_GET['user_key'];
@@ -38,13 +46,6 @@ sensor_type 为2，表示开关型传感器。
 		}
 	}
 	
-	if($sensor_status >= 1){//进行格式转换，可以识别非0、1的逻辑转换
-		$sensor_status = 1;
-	}
-	if($sensor_status <=0){
-		$sensor_status = 0;
-	}
-	
 	if($argument_error)
 		echo "Please check the input arguments.<br>";
 	else{
@@ -61,33 +62,9 @@ sensor_type 为2，表示开关型传感器。
 		$RESULT = db_select($table_user,$ROWS,$CONSTRAIN);
 		
 		if(strcmp($RESULT[0],$user_key) == 0){
-			$ROWS_sensor_info = array("sensor_status"=>$sensor_status);
-			$ROWS_sensor_log = array("sensor_id"=>$sensor_id,"sensor_value"=>$sensor_status,
-			"log_datetime"=>$upload_time);
-			
-			$RESULT = db_update($table_sensor,$ROWS_sensor_info,
-				"$table_sensor.sensor_id='$sensor_id' AND $table_sensor.user_id='$user_id' AND $table_sensor.sensor_type='2'");
-				
-			if(DEBUG_MODE){
-				echo "UPDATE Sensor \$RESULT = $RESULT<br>";
-			}
-			
-			if(!$RESULT){
-				if(DEBUG_MODE){
-					echo "Cannot update sensor info.<br>";
-				}
-			}else{
-				$RESULT = db_insert($table_log,$ROWS_sensor_log);
-				if(!$RESULT){
-					if(DEBUG_MODE){
-						echo "Sensor is updated but cannot write log.<br>";
-					}
-				}else{
-					if(DEBUG_MODE){
-						echo "All the informations are updated.<br>";
-					}
-				}
-			}
+			require_once('functions_file.php');
+			$file_name = (string)$sensor_id.(string)$upload_time.".jpg";
+			function file_upload($file_name,$img);
 		}else{
 			echo "Please check the input arguments.<br>";
 			if(DEBUG_MODE){
