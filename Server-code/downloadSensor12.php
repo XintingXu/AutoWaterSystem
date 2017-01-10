@@ -72,7 +72,7 @@ if(!DEBUG_MODE)
 		
 		$RESULT = db_select($table_user,$ROWS,$CONSTRAIN);
 		
-		if(strcmp((string)$ROWS[0]['user_pass'],(string)$user_pass) == 0){
+		if(strcmp((string)$RESULT[0]['user_pass'],(string)$user_pass) == 0){
 			$ROWS = array("sensor_type");
 			$CONSTRAIN = "$table_sensor.sensor_id='$sensor_id' AND $table_sensor.user_id='$user_id'";
 				

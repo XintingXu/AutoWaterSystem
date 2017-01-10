@@ -22,7 +22,7 @@ if(!DEBUG_MODE)
 	
 	//进行参数判断
 	$argument_error = true;
-	if(!$sensor_id || !$sensor_value || !$user_id || !$user_key){
+	if(!$sensor_id || !$user_id || !$user_key){
 		$argument_error = true;
 	}else{
 		if(!($sensor_id <= 299999999 && $sensor_id >= 200000000)){
