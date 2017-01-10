@@ -61,9 +61,9 @@
 			if(DEBUG_MODE)
 				echo "Init Check Failed.<br>";
 			echo "Please turn to the <a href = \"init.php\">Init page.</a><br>";
-			echo "Jump to the page in 5 seconds.<br>";
 			mysqli_close($conn);
 			$domain_name = DOMAIN_NAME;
+			sleep(2);
 			header("Location:http://$domain_name/init.php");
 			exit;
 		}
@@ -90,8 +90,8 @@
 				if(DEBUG_MODE)
 					echo "Init Check Failed.<br>";
 				echo "Please turn to the <a href = \"init.php\">Init page.</a>";
-				echo "Jump to the page in 5 seconds.<br>";
 				mysqli_close($conn);
+				sleep(2);
 				$domain_name = DOMAIN_NAME;
 				header("Location:http://$domain_name/init.php");
 				exit;
@@ -105,6 +105,7 @@
 		mysqli_free_result($result_user);
 		mysqli_free_result($result_sensor);
 		mysqli_free_result($result_capture);
+		mysqli_free_result($result_log);
 	}
 	
 	//关闭连接
