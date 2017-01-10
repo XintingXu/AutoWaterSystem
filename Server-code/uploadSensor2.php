@@ -60,7 +60,7 @@ header('Content-type: text/json; charset=UTF-8');
 		
 		$RESULT = db_select($table_user,$ROWS,$CONSTRAIN);
 		
-		if(strcmp($RESULT[0],$user_key) == 0){
+		if(strcmp((string)$RESULT[0],(string)$user_key) == 0){
 			$ROWS_sensor_info = array("sensor_status"=>$sensor_status);
 			$ROWS_sensor_log = array("sensor_id"=>$sensor_id,"sensor_value"=>$sensor_status,
 			"log_datetime"=>$upload_time);

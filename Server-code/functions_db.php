@@ -8,12 +8,12 @@ require_once('config.php');
 	//参数$MAIN_OR_SLAVE指示连接的是主库还是从库，主库可读写，从库只能读
 	//0表示主库，1表示从库
 	function db_connect(int $MAIN_OR_SLAVE){
-		if(!MAIN_OR_SLAVE)
+		if(!$MAIN_OR_SLAVE)
 			$conn = mysqli_connect(DATA_HOST_M,DATA_HOST_USER,DATA_HOST_PASS,DATA_HOST_DBNAME);
 		else
 			$conn = mysqli_connect(DATA_HOST_S,DATA_HOST_USER,DATA_HOST_PASS,DATA_HOST_DBNAME);
 		
-		if(!conn){
+		if(!$conn){
 			if(DEBUG_MODE)
 				echo "Cannot Connect to data server.".$mysqli_connect_error()."<br>";
 			

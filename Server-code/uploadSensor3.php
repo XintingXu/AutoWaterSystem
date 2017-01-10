@@ -6,6 +6,7 @@ sensor_type 为3，表示图像型传感器。
 */
 
 header('Content-type: text/json; charset=UTF-8');
+require_once('config.php');
 
 	//获取POST和GET的数据参数
 	$sensor_id = $_GET['sensor_id'];
@@ -19,7 +20,6 @@ header('Content-type: text/json; charset=UTF-8');
 		$captute_img = $_POST['capture'];
 	}
 	
-	require_once('config.php');
 	require_once('functions_db.php');
 	
 	//进行参数判断
@@ -61,17 +61,17 @@ header('Content-type: text/json; charset=UTF-8');
 		
 		$RESULT = db_select($table_user,$ROWS,$CONSTRAIN);
 		
-		if(strcmp($RESULT[0],$user_key) == 0){
+		if(strcmp((string)$RESULT[0],(string)$user_key) == 0){
 			if(DEBUG_MODE){
 				echo "User Pass Checked.Pass<br>";
 			}
 			
 			$ROWS = array("sensor_id");
-			$CONSTRAIN = "$table_sensor.sensor_id='$sensor_id' AND $table_sensor.user_id='$user_id';";
+			$CONSTRAIN = "$table_sensor.sensor_id='$sensor_id' AND $table_sensor.user_id='$user_id' AND $table_sensor.sensor_type='3';";
 			
 			$RESULT = db_select($table_sensor,$ROWS,$CONSTRAIN);
 			
-			if(strcmp($RESULT[0],$sensor_id) == 0){
+			if(strcmp((string)$RESULT[0],(string)$sensor_id) == 0){
 				if(DEBUG_MODE){
 					echo "User ID and User Sensor checked.<br>";
 				}
