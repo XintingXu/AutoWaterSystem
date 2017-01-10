@@ -2,7 +2,7 @@
 /*
 sensor_type 为1，表示数值型传感器。
 */
-
+header('Content-type: text/json; charset=UTF-8');
 	//获取POST和GET的数据参数
 	$sensor_id = $_GET['sensor_id'];
 	$sensor_value = $_GET['sensor_value'];

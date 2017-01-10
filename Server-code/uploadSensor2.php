@@ -3,7 +3,7 @@
 sensor_type 为2，表示开关型传感器。
 0表示关，1表示开
 */
-
+header('Content-type: text/json; charset=UTF-8');
 	//获取POST和GET的数据参数
 	$sensor_id = $_GET['sensor_id'];
 	$sensor_status = $_GET['sensor_status'];

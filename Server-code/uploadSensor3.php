@@ -7,20 +7,16 @@ sensor_type 为3，表示图像型传感器。
 
 header('Content-type: text/json; charset=UTF-8');
 
-$base64 = $_POST["image"]; // 得到文件参数
-$img = base64_decode($base64); // 将格式为base64的字符串解码
-
-//$path = "md5(uniqid(rand()))".".jpg"; // 产生随机唯一的名字作为文件名
-//file_put_contents($path, $img); // 将图片保存到相应位置
-
 	//获取POST和GET的数据参数
 	$sensor_id = $_GET['sensor_id'];
 	if(DEBUG_MODE){
 		$user_id = $_GET['user_id'];
 		$user_key = $_GET['user_key'];
+		$captute_img = $_GET['capture'];
 	}else{
 		$user_id = $_POST['user_id'];
 		$user_key = $_POST['user_key'];
+		$captute_img = $_POST['capture'];
 	}
 	
 	require_once('config.php');
@@ -40,8 +36,12 @@ $img = base64_decode($base64); // 将格式为base64的字符串解码
 			else{
 				if(strlen($user_key) != 40)
 					$argument_error = true;
-				else
-					$argument_error = false;
+				else{
+					if(strlen($captute_img) == 0)
+						$argument_error = true;
+					else
+						$argument_error = false;
+				}
 			}
 		}
 	}
@@ -57,14 +57,51 @@ $img = base64_decode($base64); // 将格式为base64的字符串解码
 		$upload_time = date("Y-m-d H:i:s");
 		
 		$ROWS = array("user_pass");
-		$CONSTRAIN = "$table_user.user_id=$user_id";
+		$CONSTRAIN = "$table_user.user_id='$user_id'";
 		
 		$RESULT = db_select($table_user,$ROWS,$CONSTRAIN);
 		
 		if(strcmp($RESULT[0],$user_key) == 0){
-			require_once('functions_file.php');
-			$file_name = (string)$sensor_id.(string)$upload_time.".jpg";
-			function file_upload($file_name,$img);
+			if(DEBUG_MODE){
+				echo "User Pass Checked.Pass<br>";
+			}
+			
+			$ROWS = array("sensor_id");
+			$CONSTRAIN = "$table_sensor.sensor_id='$sensor_id' AND $table_sensor.user_id='$user_id';";
+			
+			$RESULT = db_select($table_sensor,$ROWS,$CONSTRAIN);
+			
+			if(strcmp($RESULT[0],$sensor_id) == 0){
+				if(DEBUG_MODE){
+					echo "User ID and User Sensor checked.<br>";
+				}
+				
+				$ROWS = array("$table_sensor.sensor_capture"=>"$captute_img");
+				$CONSTRAIN = "$table_sensor.sensor_id='$sensor_id'";
+				$RESULT = db_update($table_sensor,$ROWS,$CONSTRAIN);
+				
+				if(!$RESULT){
+					echo "Sensor table is not updated";
+				}else{
+					$ROWS = array("$table_capture.sensor_id"=>"$sensor_id",
+					"$table_capture.capture_datetime"=>"$upload_time",
+					"$table_capture.sensor_capture"=>"$captute_img");
+					
+					$RESULT = db_insert($table_capture,$ROWS);
+					
+					if(!$RESULT){
+						echo "Sensor table is updated BUT log table is not inserted.<br>";
+					}else{
+						if(DEBUG_MODE)
+							echo "All the data is updated.<br>";
+					}
+				}
+			}else{
+				echo "Please check the user_id and sensor_id.<br>";
+				if(DEBUG_MODE){
+					echo "sensor_id=$sensor_id doesn't belong to user=$user_id<br>";
+				}
+			}
 		}else{
 			echo "Please check the input arguments.<br>";
 			if(DEBUG_MODE){
