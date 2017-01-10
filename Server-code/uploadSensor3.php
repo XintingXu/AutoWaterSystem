@@ -76,16 +76,16 @@ header('Content-type: text/json; charset=UTF-8');
 					echo "User ID and User Sensor checked.<br>";
 				}
 				
-				$ROWS = array("$table_sensor.sensor_capture"=>"$captute_img");
+				$ROWS = array("sensor_capture"=>"$captute_img");
 				$CONSTRAIN = "$table_sensor.sensor_id='$sensor_id'";
 				$RESULT = db_update($table_sensor,$ROWS,$CONSTRAIN);
 				
 				if(!$RESULT){
 					echo "Sensor table is not updated";
 				}else{
-					$ROWS = array("$table_capture.sensor_id"=>"$sensor_id",
-					"$table_capture.capture_datetime"=>"$upload_time",
-					"$table_capture.sensor_capture"=>"$captute_img");
+					$ROWS = array("sensor_id"=>"$sensor_id",
+					"capture_datetime"=>"$upload_time",
+					"sensor_capture"=>"$captute_img");
 					
 					$RESULT = db_insert($table_capture,$ROWS);
 					
