@@ -40,11 +40,16 @@ if(!DEBUG_MODE)
 		}
 	}
 	
-	if($argument_error)
+	$result_number = 0;
+	
+	if($argument_error){
+		$result_number = 101;
+		
 		if(DEBUG_MODE)
 			echo "Please check the input arguments.<br>";
 		else
 			;
+	}
 	else{
 		$table_user = NAME_OF_TABLE_USER;
 		$table_sensor = NAME_OF_TABLE_SENSOR;
@@ -71,26 +76,37 @@ if(!DEBUG_MODE)
 			}
 			
 			if(!$RESULT){
+				$result_number = 201;
+				
 				if(DEBUG_MODE){
 					echo "Cannot update sensor info.<br>";
 				}
 			}else{
 				$RESULT = db_insert($table_log,$ROWS_sensor_log);
 				if(!$RESULT){
+					$result_number = 301;
+					
 					if(DEBUG_MODE){
 						echo "Sensor is updated but cannot write log.<br>";
 					}
 				}else{
+					$result_number = 200;
+					
 					if(DEBUG_MODE){
 						echo "All the informations are updated.<br>";
 					}
 				}
 			}
 		}else{
+			$result_number = 101;
 			if(DEBUG_MODE){
 				echo "User Pass or User ID Error.<br>";
 				echo "Please check the input arguments.<br>";
 			}
 		}
 	}
+	
+	require_once("response_json.php");
+	
+	echo response_upload($result_number,$sensor_id,$user_id);
 ?>

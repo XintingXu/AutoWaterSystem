@@ -20,6 +20,9 @@ if(!DEBUG_MODE)
 		$captute_img = $_POST['capture'];
 	}
 	
+	//状态返回值参数
+	$result_number = 0;
+	
 	require_once('functions_db.php');
 	
 	//进行参数判断
@@ -46,9 +49,12 @@ if(!DEBUG_MODE)
 		}
 	}
 	
-	if($argument_error)
+	if($argument_error){
+		$result_number = 101;
+		
 		if(DEBUG_MODE)
 			echo "Please check the input arguments.<br>";
+	}
 	else{
 		$table_user = NAME_OF_TABLE_USER;
 		$table_sensor = NAME_OF_TABLE_SENSOR;
@@ -82,6 +88,8 @@ if(!DEBUG_MODE)
 				$RESULT = db_update($table_sensor,$ROWS,$CONSTRAIN);
 				
 				if(!$RESULT){
+					$result_number = 301;
+					
 					if(DEBUG_MODE)
 						echo "Sensor table is not updated";
 				}else{
@@ -92,24 +100,36 @@ if(!DEBUG_MODE)
 					$RESULT = db_insert($table_capture,$ROWS);
 					
 					if(!$RESULT){
+						$result_number = 301;
+						
 						if(DEBUG_MODE)
 							echo "Sensor table is updated BUT log table is not inserted.<br>";
 					}else{
+						$result_number = 200;
+						
 						if(DEBUG_MODE)
 							echo "All the data is updated.<br>";
 					}
 				}
 			}else{
+				$result_number = 201;
+				
 				if(DEBUG_MODE){
 					echo "Please check the user_id and sensor_id.<br>";
 					echo "sensor_id=$sensor_id doesn't belong to user=$user_id<br>";
 				}
 			}
 		}else{
+			$result_number = 101;
+			
 			if(DEBUG_MODE){
 				echo "Please check the input arguments.<br>";
 				echo "User Pass or User ID Error.<br>";
 			}
 		}
 	}
+	
+	require_once("response_json.php");
+	
+	echo response_upload($result_number,$sensor_id,$user_id);
 ?>
