@@ -61,7 +61,7 @@ if(!DEBUG_MODE)
 		
 		$RESULT = db_select($table_user,$ROWS,$CONSTRAIN);
 		
-		if(strcmp((string)$RESULT['user_pass'],(string)$user_key) == 0){
+		if(strcmp((string)$RESULT[0]['user_pass'],(string)$user_key) == 0){
 			if(DEBUG_MODE){
 				echo "User Pass Checked.Pass<br>";
 			}
@@ -71,7 +71,7 @@ if(!DEBUG_MODE)
 			
 			$RESULT = db_select($table_sensor,$ROWS,$CONSTRAIN);
 			
-			if(strcmp((string)$RESULT['sensor_id'],(string)$sensor_id) == 0){
+			if(strcmp((string)$RESULT[0]['sensor_id'],(string)$sensor_id) == 0){
 				if(DEBUG_MODE){
 					echo "User ID and User Sensor checked.<br>";
 				}
