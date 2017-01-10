@@ -33,7 +33,7 @@ define('STO_USERPASS','');
 define('STO_USERID','');
 
 //是否显示错误信息
-define('DEBUG_MODE',true);
+define('DEBUG_MODE',false);
 
 //定义数据表的名
 define('NAME_OF_TABLE_USER','user_info');

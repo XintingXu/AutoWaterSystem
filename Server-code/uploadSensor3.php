@@ -81,7 +81,8 @@ if(!DEBUG_MODE)
 				$RESULT = db_update($table_sensor,$ROWS,$CONSTRAIN);
 				
 				if(!$RESULT){
-					echo "Sensor table is not updated";
+					if(DEBUG_MODE)
+						echo "Sensor table is not updated";
 				}else{
 					$ROWS = array("sensor_id"=>"$sensor_id",
 					"capture_datetime"=>"$upload_time",
@@ -90,21 +91,22 @@ if(!DEBUG_MODE)
 					$RESULT = db_insert($table_capture,$ROWS);
 					
 					if(!$RESULT){
-						echo "Sensor table is updated BUT log table is not inserted.<br>";
+						if(DEBUG_MODE)
+							echo "Sensor table is updated BUT log table is not inserted.<br>";
 					}else{
 						if(DEBUG_MODE)
 							echo "All the data is updated.<br>";
 					}
 				}
 			}else{
-				echo "Please check the user_id and sensor_id.<br>";
 				if(DEBUG_MODE){
+					echo "Please check the user_id and sensor_id.<br>";
 					echo "sensor_id=$sensor_id doesn't belong to user=$user_id<br>";
 				}
 			}
 		}else{
-			echo "Please check the input arguments.<br>";
 			if(DEBUG_MODE){
+				echo "Please check the input arguments.<br>";
 				echo "User Pass or User ID Error.<br>";
 			}
 		}

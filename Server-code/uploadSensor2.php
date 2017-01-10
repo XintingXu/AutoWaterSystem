@@ -49,7 +49,10 @@ if(!DEBUG_MODE)
 	}
 	
 	if($argument_error)
-		echo "Please check the input arguments.<br>";
+		if(DEBUG_MODE)
+			echo "Please check the input arguments.<br>";
+		else
+			;
 	else{
 		$table_user = NAME_OF_TABLE_USER;
 		$table_sensor = NAME_OF_TABLE_SENSOR;
@@ -92,8 +95,8 @@ if(!DEBUG_MODE)
 				}
 			}
 		}else{
-			echo "Please check the input arguments.<br>";
 			if(DEBUG_MODE){
+				echo "Please check the input arguments.<br>";
 				echo "User Pass or User ID Error.<br>";
 			}
 		}
