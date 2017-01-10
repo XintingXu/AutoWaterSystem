@@ -2,8 +2,12 @@
 /*
 sensor_type 为1，表示数值型传感器。
 */
-header('Content-type: text/json; charset=UTF-8');
+require_once('config.php');
+
+if(!DEBUG_MODE)
+	header('Content-type: text/json; charset=UTF-8');
 	//获取POST和GET的数据参数
+	
 	$sensor_id = $_GET['sensor_id'];
 	$sensor_value = $_GET['sensor_value'];
 	if(DEBUG_MODE){
@@ -14,7 +18,6 @@ header('Content-type: text/json; charset=UTF-8');
 		$user_key = $_POST['user_key'];
 	}
 	
-	require_once('config.php');
 	require_once('functions_db.php');
 	
 	//进行参数判断
