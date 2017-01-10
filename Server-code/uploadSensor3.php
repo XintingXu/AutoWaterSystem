@@ -47,7 +47,8 @@ if(!DEBUG_MODE)
 	}
 	
 	if($argument_error)
-		echo "Please check the input arguments.<br>";
+		if(DEBUG_MODE)
+			echo "Please check the input arguments.<br>";
 	else{
 		$table_user = NAME_OF_TABLE_USER;
 		$table_sensor = NAME_OF_TABLE_SENSOR;
