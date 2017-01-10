@@ -19,7 +19,7 @@
 		$response_datetime = date("Y-m-d H:i:s");
 		
 		$res_array = array("RID"=>"$result_number","SID"=>"$sensor_id",
-							"UID"=>"$uder_id","TIME"=>"$response_datetime");
+							"UID"=>"$user_id","TIME"=>"$response_datetime");
 		return json_encode($res_array);
 	}
 	

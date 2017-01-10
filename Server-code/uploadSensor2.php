@@ -114,4 +114,8 @@ if(!DEBUG_MODE)
 			}
 		}
 	}
+	
+	require_once("response_json.php");
+	
+	echo response_upload($result_number,$sensor_id,$user_id);
 ?>
