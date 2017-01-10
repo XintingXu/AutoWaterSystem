@@ -37,7 +37,7 @@ $INIT_USER_TABLE = "INSERT INTO $TABLE_USER (user_id,user_name,user_pass,user_re
 $INIT_SENSOR_TABLE = "INSERT INTO $TABLE_SENSOR (sensor_id,user_id,sensor_type) 
 				VALUES ('200000000','100000000','0');";
 $INIT_CAPTURE_TABLE = "INSERT INTO $TABLE_CAPTURE (capture_num,sensor_id,capture_datetime,sensor_capture)
-				VALUES ('1','200000000',$ROOT_USER_REGDATE,'');";
+				VALUES ('1','200000000',$ROOT_USER_REGDATE,'SGVsbG8gV29ybGQ=');";
 $INIT_SENSOR_LOG = "INSERT INTO $TABLE_LOG (log_num,sensor_id,sensor_value,log_datetime) 
 				VALUES ('1','200000000','0','$ROOT_USER_REGDATE');";
 
@@ -111,6 +111,7 @@ mysqli_close($conn);
 
 //跳转回主页
 echo "Jump to the Index in 5 seconds.<br>";
+
 
 $domain_name = DOMAIN_NAME;
 header("Location:http://$domain_name/"); 
