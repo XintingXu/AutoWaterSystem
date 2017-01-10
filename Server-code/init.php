@@ -111,7 +111,6 @@ mysqli_close($conn);
 
 //跳转回主页
 echo "Jump to the Index in 5 seconds.<br>";
-sleep(5);
 
 $domain_name = DOMAIN_NAME;
 header("Location:http://$domain_name/"); 

@@ -62,7 +62,6 @@
 				echo "Init Check Failed.<br>";
 			echo "Please turn to the <a href = \"init.php\">Init page.</a><br>";
 			echo "Jump to the page in 5 seconds.<br>";
-			sleep(5);
 			mysqli_close($conn);
 			$domain_name = DOMAIN_NAME;
 			header("Location:http://$domain_name/init.php");
@@ -92,7 +91,6 @@
 					echo "Init Check Failed.<br>";
 				echo "Please turn to the <a href = \"init.php\">Init page.</a>";
 				echo "Jump to the page in 5 seconds.<br>";
-				sleep(5);
 				mysqli_close($conn);
 				$domain_name = DOMAIN_NAME;
 				header("Location:http://$domain_name/init.php");
