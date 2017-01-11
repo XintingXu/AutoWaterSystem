@@ -18,12 +18,21 @@ header('Content-type: text/html; charset=UTF-8');
 require_once("config.php");
 require_once("functions_db.php");
 
-$UPASS = $_POST['UPASS'];
-$UID = $_POST['UID'];
-$UNAME = $_POST['UNAME'];
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+
+$UPASS = test_input($_POST['UPASS']);
+$UID = test_input($_POST['UID']);
+$UNAME = test_input($_POST['UNAME']);
+
+
 
 $loged = true;
-if(strlen((string)$UID) != 9){
+if(strlen((string)$UID) != 9)
 	$loged = false;
 
 	if(!$loged){
