@@ -85,7 +85,7 @@ require_once('config.php');
 			return false;
 		}else{
 			$result = mysqli_query($conn,$sql);
-			while($row = mysqli_fetch_array($result,MYSQLI_BOTH)){//将结果集转换为二维数组
+			while($row = mysqli_fetch_array($result)){//将结果集转换为二维数组
 				$result_array[] = $row;
 			}
 			mysqli_free_result($result);
