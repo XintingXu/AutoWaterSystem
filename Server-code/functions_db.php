@@ -126,6 +126,7 @@ require_once('config.php');
 			mysqli_close($conn);
 			return false;
 		}else{
+			mysqli_set_charset($conn, "utf8");
 			$result = mysqli_query($conn,$sql);
 			if(!$result){
 				mysqli_close($conn);

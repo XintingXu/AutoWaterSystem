@@ -68,7 +68,7 @@ $CREATE_TABLE_SENSOR = "CREATE TABLE IF NOT EXISTS `sensor_info` (
   PRIMARY KEY (`sensor_id`),
   UNIQUE KEY `sensor_id` (`sensor_id`),
   KEY `user_id` (`user_id`)
-)AUTO_INCREMENT=200000005 DEFAULT CHARSET=utf8 COMMENT='传感器信息定义表';";
+)AUTO_INCREMENT=200000000 DEFAULT CHARSET=utf8 COMMENT='传感器信息定义表';";
 
 $CREATE_TABLE_LOG = "CREATE TABLE IF NOT EXISTS `sensor_log` (
   `log_num` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '顺序编号，从1开始',
@@ -77,7 +77,7 @@ $CREATE_TABLE_LOG = "CREATE TABLE IF NOT EXISTS `sensor_log` (
   `log_datetime` datetime NOT NULL COMMENT '传感器数据上传日期时间',
   PRIMARY KEY (`log_num`),
   KEY `sensor_id` (`sensor_id`)
-)AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='传感器数据历史记录表';";
+)AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='传感器数据历史记录表';";
 
 $CREATE_TABLE_CAPTURE = "CREATE TABLE IF NOT EXISTS `capture_info` (
   `capture_num` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '捕获的顺序编号，从1开始自增编号',
@@ -87,7 +87,7 @@ $CREATE_TABLE_CAPTURE = "CREATE TABLE IF NOT EXISTS `capture_info` (
   PRIMARY KEY (`capture_num`),
   UNIQUE KEY `capture_num` (`capture_num`),
   KEY `sensor_id` (`sensor_id`)
-)AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;";
+)AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;";
 
 $CREATE_TABLE_KEY1 = "ALTER TABLE `capture_info` ADD CONSTRAINT `sensor_constrain` FOREIGN KEY (`sensor_id`) REFERENCES `sensor_info` (`sensor_id`) ON DELETE CASCADE ON UPDATE CASCADE;";
 $CREATE_TABLE_KEY2 = "ALTER TABLE `sensor_info` ADD CONSTRAINT `user_constrain` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;";
