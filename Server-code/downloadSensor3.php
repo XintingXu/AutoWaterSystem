@@ -88,7 +88,6 @@ if(!DEBUG_MODE)
 				$table_name = $table_capture;
 				
 				$RESULT = db_select($table_name,$ROWS,$CONSTRAIN);
-				$DATA = json_encode($RESULT[0]);
 				$result_number = 200;
 			}
 		}else{
@@ -100,7 +99,7 @@ if(!DEBUG_MODE)
 		}
 	}
 	
-	$DATA = json_encode($DATA);
+	$DATA = json_encode($RESULT[0]);
 	$time = date("Y-m-d H:i:s");
 	$RESULT_ARRAY = array("RID"=>$result_number,"SID"=>$sensor_id,"TIME"=>$time,
 							"DATA"=>$DATA);
