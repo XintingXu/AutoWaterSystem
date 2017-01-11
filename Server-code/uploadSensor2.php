@@ -7,6 +7,8 @@ require_once('config.php');
 
 if(!DEBUG_MODE)
 	header('Content-type: text/json; charset=UTF-8');
+else
+	header('Content-type: text/html; charset=UTF-8');
 
 	//获取POST和GET的数据参数
 	$sensor_id = $_GET['sensor_id'];

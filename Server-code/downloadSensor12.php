@@ -41,6 +41,8 @@
 	
 if(!DEBUG_MODE)
 	header('Content-type: text/json; charset=UTF-8');
+else
+	header('Content-type: text/html; charset=UTF-8');
 	
 	$sensor_id = $_GET['sensor_id'];
 	$data_count = $_GET['data_count'];
