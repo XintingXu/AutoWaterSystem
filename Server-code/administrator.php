@@ -27,7 +27,15 @@ if(strlen((string)$UID) != 9){
 	$loged = false;
 
 	if(!$loged){
-		
+		echo "<html>
+				<body>
+				<form action=\"administrator.php\" method=\"post\">
+				User Name: <input type=\"text\" name=\"UNAME\"><br>
+				Password: <input type=\"password\" name=\"UPASS\"><br>
+				<input type=\"submit\">
+				</form>
+				</body>
+			</html>";
 	}else{
 		$log_checked = false;
 		$table_name = NAME_OF_TABLE_USER;
@@ -77,5 +85,4 @@ if(strlen((string)$UID) != 9){
 			header("Location:http://$domain_name/administrator.php"); 
 		}
 	}
-
 ?>
