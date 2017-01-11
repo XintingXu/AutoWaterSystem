@@ -82,7 +82,7 @@ if(!DEBUG_MODE)
 					echo "User ID is not competiable to the Sensor ID.<br>";
 			}
 			else{
-				$ROWS = array("sensor_capture","capture_datetime")
+				$ROWS = array("sensor_capture","capture_datetime");
 				$CONSTRAIN = "$table_capture.sensor_id='$sensor_id' ORDER BY 
 							$table_capture.capture_num DESC LIMIT $start_position,$data_count";
 				$table_name = $table_capture;
