@@ -84,7 +84,7 @@ if(!DEBUG_MODE)
 			}
 			
 			if(!$RESULT){
-				$result_number = 201;
+				$result_number = 302;
 				
 				if(DEBUG_MODE){
 					echo "Cannot update sensor info.<br>";

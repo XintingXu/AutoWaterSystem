@@ -88,7 +88,7 @@ if(!DEBUG_MODE)
 				$RESULT = db_update($table_sensor,$ROWS,$CONSTRAIN);
 				
 				if(!$RESULT){
-					$result_number = 301;
+					$result_number = 302;
 					
 					if(DEBUG_MODE)
 						echo "Sensor table is not updated";
