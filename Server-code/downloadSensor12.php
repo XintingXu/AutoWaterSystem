@@ -26,6 +26,7 @@
 	RID		结果代码
 	COUNT	返回结果个数（0<= COUNT <=10）
 	SID		传感器编号
+	SNAME	传感器名称
 	STYPE	传感器类型
 	TIME	返回时间
 	DATA	数据组
@@ -72,12 +73,14 @@ if(!DEBUG_MODE)
 		$RESULT = db_select($table_user,$ROWS,$CONSTRAIN);
 		
 		if(strcmp((string)$RESULT[0]['user_pass'],(string)$user_pass) == 0){
-			$ROWS = array("sensor_type");
+			$ROWS = array("sensor_type","sensor_name");
 			$CONSTRAIN = "$table_sensor.sensor_id='$sensor_id' AND $table_sensor.user_id='$user_id'";
 				
 			$RESULT = db_select($table_sensor,$ROWS,$CONSTRAIN);
 			
 			$sensor_type = $RESULT[0]['sensor_type'];
+			$sensor_name = $RESULT[0]['sensor_name'];
+			
 			if($sensor_type == '0' || $sensor_type == '3'){
 				$result_number = 201;
 				
@@ -131,7 +134,7 @@ if(!DEBUG_MODE)
 	
 	$DATA = json_encode($RESULT);
 	$time = date("Y-m-d H:i:s");
-	$RESULT_ARRAY = array("RID"=>$result_number,"COUNT"=>$GET_NUMBER,"SID"=>$sensor_id,"STYPE"=>$sensor_type,"TIME"=>$time,
-							"DATA"=>$DATA);
+	$RESULT_ARRAY = array("RID"=>$result_number,"COUNT"=>$GET_NUMBER,"SID"=>$sensor_id,"SNAME"=>$sensor_name,
+							"STYPE"=>$sensor_type,"TIME"=>$time,"DATA"=>$DATA);
 	echo json_encode($RESULT_ARRAY);
 ?>

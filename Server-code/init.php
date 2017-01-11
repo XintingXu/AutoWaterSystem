@@ -34,8 +34,8 @@ $TABLE_LOG = NAME_OF_TABLE_SENSORLOG;
 //初始化SQL语句
 $INIT_USER_TABLE = "INSERT INTO $TABLE_USER (user_id,user_name,user_pass,user_regdate) 
 				VALUES ('$ROOT_USERD_ID','$ROOT_USER_NAME','$PASS','$ROOT_USER_REGDATE');";
-$INIT_SENSOR_TABLE = "INSERT INTO $TABLE_SENSOR (sensor_id,user_id,sensor_type) 
-				VALUES ('200000000','100000000','0');";
+$INIT_SENSOR_TABLE = "INSERT INTO $TABLE_SENSOR (sensor_id,user_id,sensor_type,sensor_name) 
+				VALUES ('200000000','100000000','0','初始传感器');";
 $INIT_CAPTURE_TABLE = "INSERT INTO $TABLE_CAPTURE (capture_num,sensor_id,capture_datetime,sensor_capture)
 				VALUES ('1','200000000','$ROOT_USER_REGDATE','SGVsbG8gV29ybGQ=');";
 $INIT_SENSOR_LOG = "INSERT INTO $TABLE_LOG (log_num,sensor_id,sensor_value,log_datetime) 

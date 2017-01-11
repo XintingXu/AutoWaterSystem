@@ -26,6 +26,7 @@
 	/*
 	RID		结果代码
 	SID		传感器编号
+	SNAME	传感器名称
 	TIME	返回时间
 	DATA	数据组
 		sensor_capture	数据值
@@ -70,12 +71,14 @@ if(!DEBUG_MODE)
 		$RESULT = db_select($table_user,$ROWS,$CONSTRAIN);
 		
 		if(strcmp((string)$RESULT[0]['user_pass'],(string)$user_pass) == 0){
-			$ROWS = array("sensor_type");
+			$ROWS = array("sensor_type","sensor_name");
 			$CONSTRAIN = "$table_sensor.sensor_id='$sensor_id' AND $table_sensor.user_id='$user_id'";
 				
 			$RESULT = db_select($table_sensor,$ROWS,$CONSTRAIN);
 			
 			$sensor_type = $RESULT[0]['sensor_type'];
+			$sensor_name = $RESULT[0]['sensor_name'];
+			
 			if($sensor_type != '3'){
 				$result_number = 201;
 				
@@ -102,7 +105,7 @@ if(!DEBUG_MODE)
 	
 	$DATA = json_encode($RESULT[0]);
 	$time = date("Y-m-d H:i:s");
-	$RESULT_ARRAY = array("RID"=>$result_number,"SID"=>$sensor_id,"TIME"=>$time,
+	$RESULT_ARRAY = array("RID"=>$result_number,"SID"=>$sensor_id,"SNAME"=>$sensor_name,"TIME"=>$time,
 							"DATA"=>$DATA);
 	echo json_encode($RESULT_ARRAY);
 ?>
