@@ -31,7 +31,7 @@ $UNAME = $_COOKIE['UNAME'];
 $UID = $_COOKIE['UID'];
 
 $loged = true;
-if(strlen((string)$UID) != 9)
+if(strlen($UID) != 9)
 	$loged = false;
 
 	if(!$loged){
