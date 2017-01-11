@@ -61,7 +61,7 @@ $CREATE_TABLE_SENSOR = "CREATE TABLE IF NOT EXISTS `sensor_info` (
   `user_id` int(11) UNSIGNED NOT NULL COMMENT '传感器所属的用户ID',
   `sensor_name` varchar(40) DEFAULT NULL COMMENT '传感器的名称',
   `sensor_type` int(4) UNSIGNED NOT NULL DEFAULT '0' COMMENT '传感器类型，1表示数值型，2表示开关型，3表示图像型',
-  `last_modified` datetime NOT NULL COMMENT '上次修改时间',
+  `last_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '上次修改时间',
   `sensor_value` int(5) NOT NULL DEFAULT '0' COMMENT '传感器数值，默认0，只针对1-数值型',
   `sensor_status` int(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT '传感器状态，默认0，只针对2-开关型，1表示开',
   `sensor_capture` longtext COMMENT '传感器捕获的图片文件，默认为空',
