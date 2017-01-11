@@ -38,13 +38,13 @@ if(strlen((string)$UID) != 9){
 		
 		if(strcmp((string)$RESULT[0]['user_pass'],(string)$UPASS) == 0){
 			$table_name = NAME_OF_TABLE_SENSOR;
-			$ROWS = array("sensor_id","sensor_name","sensor_type","sensor_value","sensor_status","sensor_capture");
+			$ROWS = array("sensor_id","sensor_name","sensor_type","last_modified","sensor_value","sensor_status","sensor_capture");
 			$CONSTRAIN = "$table_name.user_id='$UID'";
 			
 			$RESULT = db_select($table_name,$ROWS,$CONSTRAIN);
 			
 			echo "<table width='80%' border=1 align='center' cellpadding=5 cellspacing=0>";
-			echo '<tr align="center"><td>编号</td><td>名称</td><td>值</td></tr>';
+			echo '<tr align="center"><td>编号</td><td>名称</td><td>值</td><td>修改时间</td></tr>';
 			
 			foreach($RESULT as $K=>$V){
 				echo '<tr align="center">';
@@ -65,6 +65,8 @@ if(strlen((string)$UID) != 9){
 					header('Content-type: image/jpg');
 					echo "<br>$content<br>";
 				}
+				
+				echo "<td>$V['last_modified']<td>";
 				echo '</tr>';
 			}
 			

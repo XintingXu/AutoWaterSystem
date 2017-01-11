@@ -19,6 +19,7 @@ require_once('config.php');
 			
 			return false;
 		}else{
+			mysqli_set_charset($conn, "utf8");
 			return $conn;
 		}
 	}

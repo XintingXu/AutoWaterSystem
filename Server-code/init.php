@@ -98,6 +98,7 @@ $CREATE_TABLE_KEYS = "ALTER TABLE `capture_info`
 
 //建立连接
 $conn = mysqli_connect(DATA_HOST_M,DATA_HOST_USER,DATA_HOST_PASS,DATA_HOST_DBNAME);
+mysqli_set_charset($conn, "utf8");
 
 //连接情况判断
 if(!$conn){

@@ -29,6 +29,7 @@
 		echo "This is the test part.<br>";
 	
 	$conn = mysqli_connect(DATA_HOST_M,DATA_HOST_USER,DATA_HOST_PASS,DATA_HOST_DBNAME);
+	mysqli_set_charset($conn, "utf8");
 		
 	if(!$conn){
 		echo "Cannot connect to data server.Please check your config.<br>";
