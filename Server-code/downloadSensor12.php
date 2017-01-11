@@ -94,7 +94,7 @@ if(!DEBUG_MODE)
 					else{
 						$ROWS = array("sensor_value","log_datetime");
 						$CONSTRAIN = "$table_log.sensor_id='$sensor_id' ORDER BY 
-								$table_log.capture_num DESC LIMIT $start_position,$data_count";
+								$table_log.log_num DESC LIMIT $start_position,$data_count";
 						$table_name = $table_log;
 					}
 				}
@@ -107,7 +107,7 @@ if(!DEBUG_MODE)
 					else{
 						$ROWS = array("sensor_value","log_datetime");
 						$CONSTRAIN = "$table_log.sensor_id='$sensor_id' ORDER BY 
-								$table_log.capture_num DESC LIMIT $start_position,$data_count";
+								$table_log.log_num DESC LIMIT $start_position,$data_count";
 						$table_name = $table_log;
 					}
 				}
