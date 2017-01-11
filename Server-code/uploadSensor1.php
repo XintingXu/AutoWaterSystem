@@ -78,7 +78,7 @@ else
 				echo "UPDATE Sensor \$RESULT = $RESULT<br>";
 			}
 			
-			if(!$RESULT[0]){
+			if(!$RESULT){
 				$result_number = 302;
 				
 				if(DEBUG_MODE){
