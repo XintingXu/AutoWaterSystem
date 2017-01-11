@@ -46,15 +46,19 @@
 		
 		//判断数据库中是否已经存在初始化记录
 		$check = "SELECT COUNT($table_user.user_id) FROM $table_user WHERE $table_user.user_id='100000000';";
+		mysqli_set_charset($conn, "utf8");
 		$result_user = mysqli_query($conn,$check);
 		
 		$check = "SELECT COUNT($table_sensor.sensor_id) FROM $table_sensor WHERE $table_sensor.sensor_id='200000000';";
+		mysqli_set_charset($conn, "utf8");
 		$result_sensor = mysqli_query($conn,$check);
 		
 		$check = "SELECT COUNT($table_capture.capture_num) FROM $table_capture WHERE $table_capture.capture_num='1';";
+		mysqli_set_charset($conn, "utf8");
 		$result_capture = mysqli_query($conn,$check);
 		
 		$check = "SELECT COUNT($table_log.log_num) FROM $table_log WHERE $table_log.log_num='1';";
+		mysqli_set_charset($conn, "utf8");
 		$result_log = mysqli_query($conn,$check);
 		
 		//如果返回值中存在FALSE
@@ -92,7 +96,6 @@
 					echo "Init Check Failed.<br>";
 				echo "Please turn to the <a href = \"init.php\">Init page.</a>";
 				mysqli_close($conn);
-				sleep(2);
 				$domain_name = DOMAIN_NAME;
 				header("Location:http://$domain_name/init.php");
 				exit;
