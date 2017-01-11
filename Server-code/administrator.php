@@ -17,7 +17,7 @@ header('Content-type: text/html; charset=UTF-8');
 
 require_once("config.php");
 require_once("functions_db.php");
-require_once("functions_calcu")
+require_once("functions_calcu.php");
 
 function test_input($data) {
   $data = trim($data);
