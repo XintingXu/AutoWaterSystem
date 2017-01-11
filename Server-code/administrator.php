@@ -28,6 +28,7 @@ function test_input($data) {
 
 $UPASS = $_POST['UPASS'];
 $UNAME = $_POST['UNAME'];
+$UID = "";
 
 $loged = true;
 if(strlen((string)$UID) != 9)

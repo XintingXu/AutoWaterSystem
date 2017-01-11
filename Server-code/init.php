@@ -89,12 +89,9 @@ $CREATE_TABLE_CAPTURE = "CREATE TABLE IF NOT EXISTS `capture_info` (
   KEY `sensor_id` (`sensor_id`)
 )AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;";
 
-$CREATE_TABLE_KEYS = "ALTER TABLE `capture_info`
-  ADD CONSTRAINT `sensor_constrain` FOREIGN KEY (`sensor_id`) REFERENCES `sensor_info` (`sensor_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-  ALTER TABLE `sensor_info`
-  ADD CONSTRAINT `user_constrains` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-  ALTER TABLE `sensor_log`
-  ADD CONSTRAINT `sensor_id` FOREIGN KEY (`sensor_id`) REFERENCES `sensor_info` (`sensor_id`) ON DELETE CASCADE ON UPDATE CASCADE";
+$CREATE_TABLE_KEY1 = "ALTER TABLE `capture_info` ADD CONSTRAINT `sensor_constrain` FOREIGN KEY (`sensor_id`) REFERENCES `sensor_info` (`sensor_id`) ON DELETE CASCADE ON UPDATE CASCADE;";
+$CREATE_TABLE_KEY2 = "ALTER TABLE `sensor_info` ADD CONSTRAINT `user_constrain` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;";
+$CREATE_TABLE_KEY3 = "ALTER TABLE `sensor_log` ADD CONSTRAINT `sensor_id` FOREIGN KEY (`sensor_id`) REFERENCES `sensor_info` (`sensor_id`) ON DELETE CASCADE ON UPDATE CASCADE";
 
 //建立连接
 $conn = mysqli_connect(DATA_HOST_M,DATA_HOST_USER,DATA_HOST_PASS,DATA_HOST_DBNAME);
@@ -121,8 +118,6 @@ if(!$conn){
 	$result = mysqli_query($conn,$CREATE_TABLE_LOG);
 	mysqli_set_charset($conn, "utf8");
 	$result = mysqli_query($conn,$CREATE_TABLE_CAPTURE);
-	mysqli_set_charset($conn, "utf8");
-	$result = mysqli_query($conn,$CREATE_TABLE_KEYS);
 	
 	if(DEBUG_MODE){
 		echo '$result = ';echo $result;echo "<br>";
@@ -165,8 +160,15 @@ if(!$conn){
 	}
 	
 	//判断各个操作结果
-	if($result1 && $result2 && $result3 && $result4)
+	if($result1 && $result2 && $result3 && $result4){
 		echo "Done<br>";
+		mysqli_set_charset($conn, "utf8");
+			$result = mysqli_query($conn,$CREATE_TABLE_KEY1);
+		mysqli_set_charset($conn, "utf8");
+			$result = mysqli_query($conn,$CREATE_TABLE_KEY2);
+		mysqli_set_charset($conn, "utf8");
+			$result = mysqli_query($conn,$CREATE_TABLE_KEY3);
+	}
 	else
 		echo "Something ERROR happened.Please retray.<br>";
 }
