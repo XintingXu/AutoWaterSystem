@@ -132,7 +132,6 @@ require_once('config.php');
 			$result = mysqli_affected_rows($conn);
 			mysqli_close($conn);
 			return $result;
-			}
 		}
 	}
 	
