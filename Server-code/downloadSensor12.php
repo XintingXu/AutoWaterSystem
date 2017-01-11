@@ -129,7 +129,7 @@ if(!DEBUG_MODE)
 		}
 	}
 	
-	$DATA = json_encode($DATA);
+	$DATA = json_encode($RESULT);
 	$time = date("Y-m-d H:i:s");
 	$RESULT_ARRAY = array("RID"=>$result_number,"COUNT"=>$GET_NUMBER,"SID"=>$sensor_id,"STYPE"=>$sensor_type,"TIME"=>$time,
 							"DATA"=>$DATA);
