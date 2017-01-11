@@ -84,7 +84,7 @@ if(!DEBUG_MODE)
 			else{
 				$ROWS = array("sensor_capture","capture_datetime");
 				$CONSTRAIN = "$table_capture.sensor_id='$sensor_id' ORDER BY 
-							$table_capture.capture_num DESC LIMIT $start_position,$data_count";
+							$table_capture.capture_num DESC LIMIT $start_position,1";
 				$table_name = $table_capture;
 				
 				$RESULT = db_select($table_name,$ROWS,$CONSTRAIN);
