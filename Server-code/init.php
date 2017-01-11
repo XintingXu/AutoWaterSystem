@@ -111,19 +111,25 @@ if(!$conn){
 		echo "Connection established.";echo "<br>";
 	
 	//判断清空结果
+	mysqli_set_charset($conn, "utf8");
 	$result = mysqli_query($conn,$DELETE_TABLE);
+	mysqli_set_charset($conn, "utf8");
 	$result = mysqli_query($conn,$CREATE_TABLE_USER);
+	mysqli_set_charset($conn, "utf8");
 	$result = mysqli_query($conn,$CREATE_TABLE_SENSOR);
+	mysqli_set_charset($conn, "utf8");
 	$result = mysqli_query($conn,$CREATE_TABLE_LOG);
+	mysqli_set_charset($conn, "utf8");
 	$result = mysqli_query($conn,$CREATE_TABLE_CAPTURE);
+	mysqli_set_charset($conn, "utf8");
 	$result = mysqli_query($conn,$CREATE_TABLE_KEYS);
 	
 	if(DEBUG_MODE){
-		echo '$CLEAR_TABLE = '; echo $CLEAR_TABLE; echo "<br>";
 		echo '$result = ';echo $result;echo "<br>";
 	}
 	
 	//判断USER表初始化结果
+	mysqli_set_charset($conn, "utf8");
 	$result1 = mysqli_query($conn,$INIT_USER_TABLE);
 	
 	if(DEBUG_MODE){
@@ -132,6 +138,7 @@ if(!$conn){
 	}
 	
 	//判断SENSOR表初始化结果
+	mysqli_set_charset($conn, "utf8");
 	$result2 = mysqli_query($conn,$INIT_SENSOR_TABLE);
 	
 	if(DEBUG_MODE){
@@ -140,6 +147,7 @@ if(!$conn){
 	}
 	
 	//判断CAPTURE表初始化结果
+	mysqli_set_charset($conn, "utf8");
 	$result3 = mysqli_query($conn,$INIT_CAPTURE_TABLE);
 	
 	if(DEBUG_MODE){
@@ -148,6 +156,7 @@ if(!$conn){
 	}
 	
 	//判断LOG表初始化结果
+	mysqli_set_charset($conn, "utf8");
 	$result4 = mysqli_query($conn,$INIT_SENSOR_LOG);
 	
 	if(DEBUG_MODE){
