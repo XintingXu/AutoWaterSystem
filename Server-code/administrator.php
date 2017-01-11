@@ -17,6 +17,7 @@ header('Content-type: text/html; charset=UTF-8');
 
 require_once("config.php");
 require_once("functions_db.php");
+require_once("functions_calcu")
 
 function test_input($data) {
   $data = trim($data);
@@ -25,11 +26,8 @@ function test_input($data) {
   return $data;
 }
 
-$UPASS = test_input($_POST['UPASS']);
-$UID = test_input($_POST['UID']);
-$UNAME = test_input($_POST['UNAME']);
-
-
+$UPASS = $_POST['UPASS'];
+$UNAME = $_POST['UNAME'];
 
 $loged = true;
 if(strlen((string)$UID) != 9)
@@ -46,14 +44,17 @@ if(strlen((string)$UID) != 9)
 				</body>
 			</html>";
 	}else{
+		$UPASS = test_input($UPASS);
+		$UNAME = test_input($UNAME);
+		
 		$log_checked = false;
 		$table_name = NAME_OF_TABLE_USER;
-		$ROWS = array("user_pass");
-		$CONSTRAIN = "$table_name.user_id='$UID' AND $table_name.user_name='$UNAME'";
+		$ROWS = array("user_pass","user_id","user_regdate");
+		$CONSTRAIN = "$table_name.user_name='$UNAME'";
 		
 		$RESULT = db_select($table_name,$ROWS,$CONSTRAIN);
 		
-		if(strcmp((string)$RESULT[0]['user_pass'],(string)$UPASS) == 0){
+		if((strlen((string)$RESULT[0]["user_id"]) != 0) && (strcmp((string)$RESULT[0]['user_pass'],(string)make_pass((string)$UNAME,(string)$UPASS,(string)$RESULT[0]['user_regdate'])) == 0)){
 			$table_name = NAME_OF_TABLE_SENSOR;
 			$ROWS = array("sensor_id","sensor_name","sensor_type","last_modified","sensor_value","sensor_status","sensor_capture");
 			$CONSTRAIN = "$table_name.user_id='$UID'";
