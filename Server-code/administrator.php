@@ -26,24 +26,18 @@ function test_input($data) {
   return $data;
 }
 
-$UPASS = $_POST['UPASS'];
-$UNAME = $_POST['UNAME'];
-$UID = "";
+$UPASS = $_COOKIE['UPASS'];
+$UNAME = $_COOKIE['UNAME'];
+$UID = $_COOKIE['UID'];
 
 $loged = true;
 if(strlen((string)$UID) != 9)
 	$loged = false;
 
 	if(!$loged){
-		echo "<html>
-				<body>
-				<form action=\"administrator.php\" method=\"post\">
-				User Name: <input type=\"text\" name=\"UNAME\"><br>
-				Password: <input type=\"password\" name=\"UPASS\"><br>
-				<input type=\"submit\">
-				</form>
-				</body>
-			</html>";
+		$domain_name = DOMAIN_NAME;
+		header("Location:http://$domain_name/login.php"); 
+		exit;
 	}else{
 		$UPASS = test_input($UPASS);
 		$UNAME = test_input($UNAME);
@@ -93,7 +87,7 @@ if(strlen((string)$UID) != 9)
 		}else{
 			$UID = "";
 			$domain_name = DOMAIN_NAME;
-			header("Location:http://$domain_name/administrator.php"); 
+			header("Location:http://$domain_name/login.php"); 
 		}
 	}
 ?>

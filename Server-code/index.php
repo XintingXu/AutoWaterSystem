@@ -96,9 +96,6 @@
 					echo "Init Check Failed.<br>";
 				echo "Please turn to the <a href = \"init.php\">Init page.</a>";
 				mysqli_close($conn);
-				$domain_name = DOMAIN_NAME;
-				header("Location:http://$domain_name/init.php");
-				exit;
 			}
 			else{
 				echo "Init check done.<br>";
@@ -120,6 +117,8 @@
 			designed and modified by XuXinting.<br>
 			Copyright©<?php echo date("Y"); ?>
 		</p>
+		
+		<p><a href = "administrator.php">LogIn</a></p>
 	</body>
 	
 </html>
