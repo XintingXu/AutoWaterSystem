@@ -128,14 +128,10 @@ require_once('config.php');
 		}else{
 			mysqli_set_charset($conn, "utf8");
 			$result = mysqli_query($conn,$sql);
-			if(!$result){
-				mysqli_close($conn);
-				return false;
-			}else{
-				mysqli_set_charset($conn, "utf8");
-				$result = mysqli_affected_rows($conn);
-				mysqli_close($conn);
-				return $result;
+			mysqli_set_charset($conn, "utf8");
+			$result = mysqli_affected_rows($conn);
+			mysqli_close($conn);
+			return $result;
 			}
 		}
 	}
