@@ -51,7 +51,6 @@ require_once('config.php');
 		$conn = db_connect(0);//连接主库进行插入
 		
 		if($conn){
-			mysqli_set_charset($conn, "utf8");
 			$result = mysqli_query($conn,$sql);
 			mysqli_close($conn);
 			return $result;
@@ -86,7 +85,6 @@ require_once('config.php');
 			mysqli_close($conn);
 			return false;
 		}else{
-			mysqli_set_charset($conn, "utf8");
 			$result = mysqli_query($conn,$sql);
 			while($row = mysqli_fetch_array($result,MYSQLI_ASSOC)){//将结果集转换为二维数组,内层数组按照列名索引
 				$result_array[] = $row;
@@ -126,9 +124,7 @@ require_once('config.php');
 			mysqli_close($conn);
 			return false;
 		}else{
-			mysqli_set_charset($conn, "utf8");
 			$result = mysqli_query($conn,$sql);
-			mysqli_set_charset($conn, "utf8");
 			$result = mysqli_affected_rows($conn);
 			mysqli_close($conn);
 			return $result;
@@ -147,7 +143,6 @@ require_once('config.php');
 			mysqli_close($conn);
 			return false;
 		}else{
-			mysqli_set_charset($conn, "utf8");
 			$result = mysqli_query($conn,$sql);
 			mysqli_close($conn);
 			return $result;

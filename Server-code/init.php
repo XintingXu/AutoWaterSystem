@@ -91,7 +91,7 @@ $CREATE_TABLE_CAPTURE = "CREATE TABLE IF NOT EXISTS `capture_info` (
 
 $CREATE_TABLE_KEY1 = "ALTER TABLE `capture_info` ADD CONSTRAINT `sensor_constrain` FOREIGN KEY (`sensor_id`) REFERENCES `sensor_info` (`sensor_id`) ON DELETE CASCADE ON UPDATE CASCADE;";
 $CREATE_TABLE_KEY2 = "ALTER TABLE `sensor_info` ADD CONSTRAINT `user_constrain` FOREIGN KEY (`user_id`) REFERENCES `user_info` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;";
-$CREATE_TABLE_KEY3 = "ALTER TABLE `sensor_log` ADD CONSTRAINT `sensor_id` FOREIGN KEY (`sensor_id`) REFERENCES `sensor_info` (`sensor_id`) ON DELETE CASCADE ON UPDATE CASCADE";
+$CREATE_TABLE_KEY3 = "ALTER TABLE `sensor_log` ADD CONSTRAINT `sensor_id` FOREIGN KEY (`sensor_id`) REFERENCES `sensor_info` (`sensor_id`) ON DELETE CASCADE ON UPDATE CASCADE;";
 
 //建立连接
 $conn = mysqli_connect(DATA_HOST_M,DATA_HOST_USER,DATA_HOST_PASS,DATA_HOST_DBNAME);
