@@ -1,5 +1,6 @@
 <?php
 	//处理传感器数据请求
+	//仅处理3型（图片传感器），每次返回一个，可以指定位置顺序（逆序）
 	
 	/*
 	返回值200代表正常处理，结果正确
@@ -16,7 +17,6 @@
 	
 	GET:
 		sensor_id	//传感器ID
-		data_count	//要获取的数据个数
 		start_position	//开始的位置,从0开始
 	
 	*/
@@ -24,25 +24,22 @@
 	//返回的参数
 	/*
 	RID		结果代码
-	COUNT	返回结果个数（0<= COUNT <=10）
 	SID		传感器编号
-	STYPE	传感器类型
 	TIME	返回时间
 	DATA	数据组
-		sensor_value,sensor_status	数据值
-		log_datetime	数据上传日期(只针对查询多个数据时)
+		sensor_capture	数据值
+		capture_datetime	数据上传日期
 	*/
 	
 	require_once("config.php");
 	$table_user = NAME_OF_TABLE_USER;
 	$table_sensor = NAME_OF_TABLE_SENSOR;
-	$table_log = NAME_OF_TABLE_SENSORLOG;
+	$table_capture = NAME_OF_TABLE_CAPTURE;
 	
 if(!DEBUG_MODE)
 	header('Content-type: text/json; charset=UTF-8');
 	
 	$sensor_id = $_GET['sensor_id'];
-	$data_count = $_GET['data_count'];
 	$start_position = $_GET['start_position'];
 	$sensor_type = 0;
 	
@@ -78,46 +75,20 @@ if(!DEBUG_MODE)
 			$RESULT = db_select($table_sensor,$ROWS,$CONSTRAIN);
 			
 			$sensor_type = $RESULT[0]['sensor_type'];
-			if($sensor_type == '0' || $sensor_type == '3'){
+			if($sensor_type != '3'){
 				$result_number = 201;
 				
 				if(DEBUG_MODE)
 					echo "User ID is not competiable to the Sensor ID.<br>";
 			}
 			else{
-				if($sensor_type == '1'){
-					if($data_count <= '1'){
-						$ROWS = array("sensor_value");
-						$CONSTRAIN = "$table_sensor.sensor_id='$sensor_id'";
-						$table_name= $table_sensor;
-					}
-					else{
-						$ROWS = array("sensor_value","log_datetime");
-						$CONSTRAIN = "$table_log.sensor_id='$sensor_id' ORDER BY 
-								$table_log.capture_num DESC LIMIT $start_position,$data_count";
-						$table_name = $table_log;
-					}
-				}
-				if($sensor_type == '2'){
-					if($data_count <= '1'){
-						$ROWS = array("sensor_status");
-						$CONSTRAIN = "$table_sensor.sensor_id='$sensor_id'";
-						$table_name = $table_log;
-					}
-					else{
-						$ROWS = array("sensor_value","log_datetime");
-						$CONSTRAIN = "$table_log.sensor_id='$sensor_id' ORDER BY 
-								$table_log.capture_num DESC LIMIT $start_position,$data_count";
-						$table_name = $table_log;
-					}
-				}
+				$ROWS = array("sensor_capture","capture_datetime")
+				$CONSTRAIN = "$table_capture.sensor_id='$sensor_id' ORDER BY 
+							$table_capture.capture_num DESC LIMIT $start_position,$data_count";
+				$table_name = $table_capture;
 				
 				$RESULT = db_select($table_name,$ROWS,$CONSTRAIN);
-				
-				$GET_NUMBER = 0;
-				foreach($RESULT as $K=>$V){
-					$GET_NUMBER++;
-				}
+				$DATA = json_encode($RESULT[0]);
 				$result_number = 200;
 			}
 		}else{
@@ -131,7 +102,7 @@ if(!DEBUG_MODE)
 	
 	$DATA = json_encode($DATA);
 	$time = date("Y-m-d H:i:s");
-	$RESULT_ARRAY = array("RID"=>$result_number,"COUNT"=>$GET_NUMBER,"SID"=>$sensor_id,"STYPE"=>$sensor_type,"TIME"=>$time,
+	$RESULT_ARRAY = array("RID"=>$result_number,"SID"=>$sensor_id,"TIME"=>$time,
 							"DATA"=>$DATA);
 	echo json_encode($RESULT_ARRAY);
 ?>
