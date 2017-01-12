@@ -7,8 +7,8 @@ require_once('config.php');
 	//数据库连接函数，返回一个连接，如果连接失败，Debug模式下显示错误信息；正确则返回一个连接
 	//参数$MAIN_OR_SLAVE指示连接的是主库还是从库，主库可读写，从库只能读
 	//0表示主库，1表示从库
-	function db_connect(int $MAIN_OR_SLAVE){
-		if(!$MAIN_OR_SLAVE)
+	function db_connect($MAIN_OR_SLAVE){
+		if($MAIN_OR_SLAVE == 0)
 			$conn = mysqli_connect(DATA_HOST_M,DATA_HOST_USER,DATA_HOST_PASS,DATA_HOST_DBNAME);
 		else
 			$conn = mysqli_connect(DATA_HOST_S,DATA_HOST_USER,DATA_HOST_PASS,DATA_HOST_DBNAME);
@@ -27,7 +27,7 @@ require_once('config.php');
 	//数据库数据插入函数
 	//参数1是数据表的名，参数2是字段、值的关联数组
 	//返回值是true 或 false
-	function db_insert(string $table_name,array $rows_data_array){
+	function db_insert($table_name,array $rows_data_array){
 		$rows = "";
 		$values = "";
 		$i = 0;
@@ -62,7 +62,7 @@ require_once('config.php');
 	
 	//从数据表中查询数据，参数为表名、约束条件(不带WHERE)
 	//返回字段、值的关联的二维数组或者false
-	function db_select(string $table_name,array $rows,string $constrain){
+	function db_select($table_name,array $rows,$constrain){
 		$string_rows = "";
 		$i = 0;
 		foreach($rows as $row){
@@ -100,7 +100,7 @@ require_once('config.php');
 	//更新数据表
 	//参数包括表名、要修改数据的K-V值数组，约束条件字符串(不带WHERE)
 	//返回值是影响的行数
-	function db_update(string $table_name,array $rows_data_array,string $constrain){
+	function db_update($table_name,$rows_data_array,$constrain){
 		$sql = "UPDATE $table_name SET ";
 		
 		$i = 0;
@@ -135,7 +135,7 @@ require_once('config.php');
 	//数据表中删除记录
 	//参数表名、条件(不带WHERE);成功返回true，失败返回false
 	//
-	function db_delete(string $table_name,string $constrain){
+	function db_delete($table_name,$constrain){
 		$sql = "DELETE FROM $table_name WHERE $constrain;";
 		
 		$conn = db_connect(0);//连接主库删除

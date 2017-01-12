@@ -40,7 +40,7 @@
 		$ROWS = array("user_id","user_pass","user_regdate");
 		$CONSTRAIN = "$table_name.user_name='$UNAME'";
 		
-		$RESULT = db_select($table_name,$ROWS,$CONSTRAIN);
+		$RESULT = db_select((string)$table_name,$ROWS,$CONSTRAIN);
 		
 		if(strlen($RESULT[0]['user_id']) != 9){
 			echo "Please check the user name.<br>";
