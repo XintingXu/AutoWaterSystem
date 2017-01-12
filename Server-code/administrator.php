@@ -71,6 +71,8 @@ if(DEBUG_MODE)
 
 			foreach($RESULT as $K=>$V){
 				echo "$K => $V";
+				foreach($V as $x=>$x_value)
+					echo "$x => $x_value";
 /*
 				echo '<tr align="center">';
 				echo "<td>$V[\"sensor_id\"]</td><td>$V[\"sensor_name\"]</td>";
