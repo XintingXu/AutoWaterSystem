@@ -104,7 +104,6 @@ if(DEBUG_MODE)
 				}
 				if($sensor_type == '3'){
 					$img = base64_decode($sensor_capture);
-					header('Content-type: image/jpg');
 					echo "<td>$img</td>";
 				}
 				if($sensor_type == '0'){
