@@ -27,12 +27,15 @@ function test_input($data) {
 }
 
 $UPASS = $_COOKIE['UPASS'];
+echo "UPASS = $UPASS<br>";
 $UNAME = $_COOKIE['UNAME'];
+echo "UNAME = $UNAME<br>";
 $UID = $_COOKIE['UID'];
+echo "UID = $UID<br>";
 
-$loged = true;
-if(strlen($UID) != 9)
-	$loged = false;
+	$loged = true;
+	if(strlen($UID) != 9)
+		$loged = false;
 
 	if(!$loged){
 		$domain_name = DOMAIN_NAME;
@@ -40,7 +43,9 @@ if(strlen($UID) != 9)
 		exit;
 	}else{
 		$UPASS = test_input($UPASS);
+		echo "UPASS = $UPASS<br>";
 		$UNAME = test_input($UNAME);
+		echo "UPASS = $UPASS<br>";
 		
 		$log_checked = false;
 		$table_name = NAME_OF_TABLE_USER;
@@ -58,7 +63,7 @@ if(strlen($UID) != 9)
 			
 			echo "<table width='80%' border=1 align='center' cellpadding=5 cellspacing=0>";
 			echo '<tr align="center"><td>编号</td><td>名称</td><td>值</td><td>修改时间</td></tr>';
-			
+			/*
 			foreach($RESULT as $K=>$V){
 				echo '<tr align="center">';
 				echo "<td>$V['sensor_id']</td><td>$V['sensor_name']</td>";
@@ -82,7 +87,7 @@ if(strlen($UID) != 9)
 				echo "<td>$V['last_modified']<td>";
 				echo '</tr>';
 			}
-			
+			*/
 			echo '</table>';
 		}else{
 			$UID = "";
