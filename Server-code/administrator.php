@@ -36,6 +36,9 @@ $UID = $_COOKIE['UID'];
 if(DEBUG_MODE)
 	echo "UID = $UID<br>";
 
+$CSID = $_GET['CUID'];//开关的2型传感器ID
+$CSOP = $_GET['CSOP'];//开关的操作
+
 	$loged = true;
 	if(strlen($UID) != 9)
 		$loged = false;
@@ -96,9 +99,9 @@ if(DEBUG_MODE)
 				}
 				if($sensor_type == '2'){
 					if($sensor_status == '1'){
-						echo "<td>开</td>";
+						echo "<td><a herf = \"administrator.php?CUID=$sensor_id&CSOP=0\">开</a></td>";
 					}else{
-						echo "<td>关</td>";
+						echo "<td><a herf = \"administrator.php?CUID=$sensor_id&CSOP=1\">关</a></td>";
 					}
 				}
 				if($sensor_type == '3'){
