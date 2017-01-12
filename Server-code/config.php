@@ -45,7 +45,7 @@ define('NAME_OF_TABLE_SENSORLOG','sensor_log');
 define('ROOT_USED_ID','100000000');
 
 //定义数据库初始化时的初始用户名
-define('ROOT_USED_NAME','xuxitning');
+define('ROOT_USED_NAME','xuxinting');
 
 //定义数据库初始化时的初始密码
 define('ROOT_USED_PASS','1199552233');

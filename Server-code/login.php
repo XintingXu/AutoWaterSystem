@@ -37,15 +37,16 @@
 		$UPASS = test_input($UPASS);
 		
 		$table_name = NAME_OF_TABLE_USER;
-		$ROWS = array('user_id','user_pass','user_regdate');
+		$ROWS = array("user_id","user_pass","user_regdate");
 		$CONSTRAIN = "$table_name.user_name='$UNAME'";
 		
 		$RESULT = db_select($table_name,$ROWS,$CONSTRAIN);
 		
-		if(strlen($RESULT[0]['user_id']) == 0){
+		if(strlen($RESULT[0]['user_id']) != 9){
 			echo "Please check the user name.<br>";
 		}else{
-			if(strcmp($RESULT[0]['user_pass'],make_pass($user_name,$RESULT[0]['user_regdate'],$user_pass)) == 0){
+			$pass_calcu = make_pass($UNAME,$RESULT[0]['user_regdate'],$UPASS);
+			if(strcmp($RESULT[0]['user_pass'],$pass_calcu) == 0){
 				setcookie("UNAME",$UNAME,time()+600);
 				setcookie("UID",$RESULT[0]['user_id'],time()+600);
 				setcookie("UPASS",$RESULT[0]['user_pass'],time()+600);
