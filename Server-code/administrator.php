@@ -67,7 +67,7 @@ $CSOP = $_GET['CSOP'];//开关的操作
 			if(strlen($CSID) == 9){
 				if(DEBUG_MODE){
 					$ch = curl_init();
-					curl_setopt($ch, CURLOPT_URL,"uploadSensor2.php?sensor_id=$CSID&sensor_status=$CSOP&user_id=$UID&user_key=$UPASS");
+					curl_setopt($ch, CURLOPT_URL,"http://$domain_name/uploadSensor2.php?sensor_id=$CSID&sensor_status=$CSOP&user_id=$UID&user_key=$UPASS");
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 					curl_setopt($ch, CURLOPT_HEADER, 0);
 					$result = curl_exec($ch);
@@ -76,7 +76,7 @@ $CSOP = $_GET['CSOP'];//开关的操作
 				}else{
 					$ch = curl_init();
 					$data = array('user_id'=>"$UID",'user_key'=>"$UPASS");
-					curl_setopt($ch, CURLOPT_URL,"uploadSensor2.php?sensor_id=$CSID&sensor_status=$CSOP");
+					curl_setopt($ch, CURLOPT_URL,"http://$domain_name/uploadSensor2.php?sensor_id=$CSID&sensor_status=$CSOP");
 					curl_setopt($ch, CURLOPT_POST, 1);
 					curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 					$result = curl_exec($ch);
