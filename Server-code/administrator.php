@@ -71,8 +71,8 @@ $CSOP = $_GET['CSOP'];//开关的操作
 					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 					curl_setopt($ch, CURLOPT_HEADER, 0);
 					$result = curl_exec($ch);
-					curl_close($ch);
 					echo "$result";
+					curl_close($ch);
 				}else{
 					$ch = curl_init();
 					$data = array('user_id'=>"$UID",'user_key'=>"$UPASS");
@@ -80,8 +80,8 @@ $CSOP = $_GET['CSOP'];//开关的操作
 					curl_setopt($ch, CURLOPT_POST, 1);
 					curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 					$result = curl_exec($ch);
-					curl_close($ch);
 					echo "$result";
+					curl_close($ch);
 				}
 			}
 			
