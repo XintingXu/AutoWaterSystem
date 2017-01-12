@@ -75,7 +75,7 @@ if(DEBUG_MODE)
 					if($x == 'sensor_id')
 						$sensor_id = $x_value;
 					if($x == 'seneor_name')
-						$seneor_name = $x_value;
+						$sensor_name = $x_value;
 					if($x == 'sensor_type')
 						$sensor_type = $x_value;
 					if($x == 'sensor_value')
@@ -105,6 +105,9 @@ if(DEBUG_MODE)
 					$img = base64_decode($sensor_capture);
 					header('Content-type: image/jpg');
 					echo "<td>$img</td>";
+				}
+				if($sensor_type == '0'){
+					echo "<td>NULL</td>";
 				}
 				
 				echo "<td>$last_modified</td>";
