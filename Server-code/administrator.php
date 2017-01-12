@@ -74,7 +74,7 @@ if(DEBUG_MODE)
 				foreach($V as $x=>$x_value){
 					if($x == 'sensor_id')
 						$sensor_id = $x_value;
-					if($x == 'seneor_name')
+					if($x == 'sensor_name')
 						$sensor_name = $x_value;
 					if($x == 'sensor_type')
 						$sensor_type = $x_value;
