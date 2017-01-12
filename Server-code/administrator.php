@@ -68,7 +68,7 @@ if(DEBUG_MODE)
 			
 			echo "<table width='80%' border=1 align='center' cellpadding=5 cellspacing=0>";
 			echo '<tr align="center"><td>编号</td><td>名称</td><td>值</td><td>修改时间</td></tr>';
-
+/*
 			foreach($RESULT as $K=>$V){
 				echo '<tr align="center">';
 				echo "<td>$V[\"sensor_id\"]</td><td>$V[\"sensor_name\"]</td>";
@@ -83,8 +83,8 @@ if(DEBUG_MODE)
 						echo "<td>关</td>";
 					}
 				}
-				if($V['sensor_type'] == '3'){
-					$img = base64_decode($V['sensor_capture']);
+				if($V["sensor_type"] == '3'){
+					$img = base64_decode($V["sensor_capture"]);
 					header('Content-type: image/jpg');
 					echo "<br>$content<br>";
 				}
@@ -93,6 +93,7 @@ if(DEBUG_MODE)
 				echo '</tr>';
 			}
 			echo '</table>';
+*/
 		}else{
 			$UID = "";
 			setcookie("UNAME","",time()-100);
