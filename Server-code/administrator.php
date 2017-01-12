@@ -93,9 +93,9 @@ if(DEBUG_MODE)
 				
 				echo "<td>$V[\"last_modified\"]<td>";
 				echo '</tr>';
+*/
 			}
 			echo '</table>';
-*/
 		}else{
 			$UID = "";
 			setcookie("UNAME","",time()-100);
