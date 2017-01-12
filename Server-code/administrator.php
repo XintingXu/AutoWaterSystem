@@ -103,8 +103,7 @@ if(DEBUG_MODE)
 					}
 				}
 				if($sensor_type == '3'){
-					$img = base64_decode($sensor_capture);
-					echo "<td>$img</td>";
+					echo "<td><img src='data:img/jpg;base64,$sensor_capture'/></td>";
 				}
 				if($sensor_type == '0'){
 					echo "<td>NULL</td>";
