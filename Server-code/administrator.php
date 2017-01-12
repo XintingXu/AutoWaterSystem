@@ -54,7 +54,7 @@ echo "UID = $UID<br>";
 		
 		$RESULT = db_select($table_name,$ROWS,$CONSTRAIN);
 		
-		if((strlen((string)$RESULT[0]["user_id"]) != 0) && (strcmp((string)$RESULT[0]['user_pass'],(string)make_pass((string)$UNAME,(string)$UPASS,(string)$RESULT[0]['user_regdate'])) == 0)){
+		if((strlen((string)$RESULT[0]["user_id"]) != 0) && (strcmp((string)$RESULT[0]['user_pass'],$UPASS) == 0)){
 			$table_name = NAME_OF_TABLE_SENSOR;
 			$ROWS = array("sensor_id","sensor_name","sensor_type","last_modified","sensor_value","sensor_status","sensor_capture");
 			$CONSTRAIN = "$table_name.user_id='$UID'";
@@ -91,6 +91,9 @@ echo "UID = $UID<br>";
 			echo '</table>';
 		}else{
 			$UID = "";
+			setcookie("UNAME","",time()-100);
+			setcookie("UPASS","",time()-100);
+			setcookie("UID","",time()-100);
 			$domain_name = DOMAIN_NAME;
 			header("Location:http://$domain_name/login.php"); 
 		}
