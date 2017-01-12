@@ -63,6 +63,7 @@ $CSOP = $_GET['CSOP'];//开关的操作
 		$RESULT = db_select($table_name,$ROWS,$CONSTRAIN);
 		
 		if((strlen((string)$RESULT[0]["user_id"]) != 0) && (strcmp((string)$RESULT[0]["user_pass"],$UPASS) == 0)){
+			
 			if(strlen($CSID) == 9){
 				if(DEBUG_MODE){
 					$ch = curl_init();
