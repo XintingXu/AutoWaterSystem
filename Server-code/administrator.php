@@ -86,7 +86,7 @@ if(DEBUG_MODE)
 						$sensor_capture = $x_value;
 					if($x == 'last_modified')
 						$last_modified = $x_value;
-					echo "$K=>$V<br>";
+					echo "$x=>$x_value<br>";
 				}
 
 				echo '<tr align="center">';
