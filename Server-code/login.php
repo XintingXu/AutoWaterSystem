@@ -46,6 +46,8 @@
 			echo "Please check the user name.<br>";
 		}else{
 			$pass_calcu = make_pass($UNAME,$RESULT[0]['user_regdate'],$UPASS);
+			if(DEBUG_MODE)
+				echo "pass_calcu = $pass_calcu";
 			if(strcmp($RESULT[0]['user_pass'],$pass_calcu) == 0){
 				setcookie("UNAME",$UNAME,time()+600);
 				setcookie("UID",$RESULT[0]['user_id'],time()+600);
