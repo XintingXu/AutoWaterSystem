@@ -70,32 +70,45 @@ if(DEBUG_MODE)
 			echo '<tr align="center"><td>编号</td><td>名称</td><td>值</td><td>修改时间</td></tr>';
 
 			foreach($RESULT as $K=>$V){
-				echo "$K => $V";
-				foreach($V as $x=>$x_value)
-					echo "$x => $x_value";
-/*
 				echo '<tr align="center">';
-				echo "<td>$V[\"sensor_id\"]</td><td>$V[\"sensor_name\"]</td>";
-				
-				if($V["sensor_type"] == '1'){
-					echo "<td>$V[\"sensor_value\"]</td>";
+				foreach($V as $x=>$x_value){
+					if($x == 'sensor_id')
+						$sensor_id = $x_value;
+					if($x == 'seneor_name')
+						$seneor_name = $x_value;
+					if($x == 'sensor_type')
+						$sensor_type = $x_value;
+					if($x == 'sensor_value')
+						$sensor_value = $x_value;
+					if($x == 'sensor_status')
+						$sensor_status = $x_value;
+					if($x == 'sensor_capture')
+						$sensor_capture = $x_value;
+					if($x == 'last_modified')
+						$last_modified = $x_value;
 				}
-				if($V["sensor_type"] == '2'){
-					if($V["sensor_status"] == '1'){
+
+				echo '<tr align="center">';
+				echo "<td>$sensor_id</td><td>$sensor_name</td>";
+				
+				if($sensor_type == '1'){
+					echo "<td>$sensor_value</td>";
+				}
+				if($sensor_type == '2'){
+					if($sensor_status == '1'){
 						echo "<td>开</td>";
 					}else{
 						echo "<td>关</td>";
 					}
 				}
-				if($V["sensor_type"] == '3'){
-					$img = base64_decode($V["sensor_capture"]);
+				if($sensor_type == '3'){
+					$img = base64_decode($sensor_capture);
 					header('Content-type: image/jpg');
-					echo "<br>$content<br>";
+					echo "<td>$img</td>";
 				}
 				
-				echo "<td>$V[\"last_modified\"]<td>";
+				echo "<td>$last_modified</td>";
 				echo '</tr>';
-*/
 			}
 			echo '</table>';
 		}else{
