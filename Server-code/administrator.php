@@ -36,7 +36,7 @@ $UID = $_COOKIE['UID'];
 if(DEBUG_MODE)
 	echo "UID = $UID<br>";
 
-$CSID = $_GET['CUID'];//开关的2型传感器ID
+$CSID = $_GET['CSID'];//开关的2型传感器ID
 $CSOP = $_GET['CSOP'];//开关的操作
 
 	$loged = true;
@@ -63,6 +63,27 @@ $CSOP = $_GET['CSOP'];//开关的操作
 		$RESULT = db_select($table_name,$ROWS,$CONSTRAIN);
 		
 		if((strlen((string)$RESULT[0]["user_id"]) != 0) && (strcmp((string)$RESULT[0]["user_pass"],$UPASS) == 0)){
+			if(strlen($CSID) == 9){
+				if(DEBUG_MODE){
+					$ch = curl_init();
+					curl_setopt($ch, CURLOPT_URL,"uploadSensor2.php?sensor_id=$CSID&sensor_status=$CSOP&user_id=$UID&user_key=$UPASS");
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+					curl_setopt($ch, CURLOPT_HEADER, 0);
+					$result = curl_exec($ch);
+					curl_close($ch);
+					echo "$result";
+				}else{
+					$ch = curl_init();
+					$data = array('user_id'=>"$UID",'user_key'=>"$UPASS");
+					curl_setopt($ch, CURLOPT_URL,"uploadSensor2.php?sensor_id=$CSID&sensor_status=$CSOP");
+					curl_setopt($ch, CURLOPT_POST, 1);
+					curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+					$result = curl_exec($ch);
+					curl_close($ch);
+					echo "$result";
+				}
+			}
+			
 			$table_name = NAME_OF_TABLE_SENSOR;
 			$ROWS = array("sensor_id","sensor_name","sensor_type","last_modified","sensor_value","sensor_status","sensor_capture");
 			$CONSTRAIN = "$table_name.user_id='$UID'";
@@ -99,9 +120,9 @@ $CSOP = $_GET['CSOP'];//开关的操作
 				}
 				if($sensor_type == '2'){
 					if($sensor_status == '1'){
-						echo "<td><a href = \"administrator.php?CUID=$sensor_id&CSOP=0\">开</a></td>";
+						echo "<td><a href = \"administrator.php?CSID=$sensor_id&CSOP=0\">开</a></td>";
 					}else{
-						echo "<td><a href = \"administrator.php?CUID=$sensor_id&CSOP=1\">关</a></td>";
+						echo "<td><a href = \"administrator.php?CSID=$sensor_id&CSOP=1\">关</a></td>";
 					}
 				}
 				if($sensor_type == '3'){
