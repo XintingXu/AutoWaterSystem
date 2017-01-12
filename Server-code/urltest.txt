@@ -1,6 +1,6 @@
 http://www.xuxinting.cn/AutoWaterSystem/uploadSensor1.php?sensor_id=200000001&sensor_value=575&user_id=100000000&user_key=edbd1bae3cce042cd2c03bede47eef611fb03ac9
 http://www.xuxinting.cn/AutoWaterSystem/uploadSensor2.php?sensor_id=200000002&sensor_status=8&user_id=100000000&user_key=edbd1bae3cce042cd2c03bede47eef611fb03ac9
-http://www.xuxinting.cn/AutoWaterSystem/uploadSensor3.php?sensor_id=200000003&capture=44DFGF12333hfhh&user_id=100000000&user_key=edbd1bae3cce042cd2c03bede47eef611fb03ac9
+http://www.xuxinting.cn/AutoWaterSystem/uploadSensor3.php?sensor_id=200000006&capture=fhdfhfhfhfdghdfg&user_id=100000000&user_key=a5b01897db57be0b59519b41c0b9ff0e7397d794
 
 http://www.xuxinting.cn/AutoWaterSystem/downloadSensor12.php?sensor_id=200000001&data_count=4&start_position=5&user_id=100000000&user_pass=edbd1bae3cce042cd2c03bede47eef611fb03ac9
-http://www.xuxinting.cn/AutoWaterSystem/downloadSensor3.php?sensor_id=200000003&start_position=0&user_id=100000000&user_pass=edbd1bae3cce042cd2c03bede47eef611fb03ac9
+http://www.xuxinting.cn/AutoWaterSystem/downloadSensor3.php?sensor_id=200000006&start_position=0&user_id=100000000&user_pass=edbd1bae3cce042cd2c03bede47eef611fb03ac9

@@ -99,9 +99,9 @@ $CSOP = $_GET['CSOP'];//开关的操作
 				}
 				if($sensor_type == '2'){
 					if($sensor_status == '1'){
-						echo "<td><a herf = \"administrator.php?CUID=$sensor_id&CSOP=0\">开</a></td>";
+						echo "<td><a href = \"administrator.php?CUID=$sensor_id&CSOP=0\">开</a></td>";
 					}else{
-						echo "<td><a herf = \"administrator.php?CUID=$sensor_id&CSOP=1\">关</a></td>";
+						echo "<td><a href = \"administrator.php?CUID=$sensor_id&CSOP=1\">关</a></td>";
 					}
 				}
 				if($sensor_type == '3'){
