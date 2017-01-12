@@ -74,6 +74,7 @@ $CSOP = $_GET['CSOP'];//开关的操作
 					$result = curl_exec($ch);
 					echo "$result";
 					curl_close($ch);
+					header("Location:http://$domain_name/administrator.php");
 				}else{
 					$ch = curl_init();
 					$data = array('user_id'=>"$UID",'user_key'=>"$UPASS");
@@ -83,6 +84,7 @@ $CSOP = $_GET['CSOP'];//开关的操作
 					$result = curl_exec($ch);
 					echo "$result";
 					curl_close($ch);
+					header("Location:http://$domain_name/administrator.php");
 				}
 			}
 			
