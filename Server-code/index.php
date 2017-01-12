@@ -95,7 +95,6 @@
 				if(DEBUG_MODE)
 					echo "Init Check Failed.<br>";
 				echo "Please turn to the <a href = \"init.php\">Init page.</a>";
-				mysqli_close($conn);
 			}
 			else{
 				echo "Init check done.<br>";

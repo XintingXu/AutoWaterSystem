@@ -59,7 +59,7 @@ if(DEBUG_MODE)
 		
 		$RESULT = db_select($table_name,$ROWS,$CONSTRAIN);
 		
-		if((strlen((string)$RESULT[0]["user_id"]) != 0) && (strcmp((string)$RESULT[0]['user_pass'],$UPASS) == 0)){
+		if((strlen((string)$RESULT[0]["user_id"]) != 0) && (strcmp((string)$RESULT[0]["user_pass"],$UPASS) == 0)){
 			$table_name = NAME_OF_TABLE_SENSOR;
 			$ROWS = array("sensor_id","sensor_name","sensor_type","last_modified","sensor_value","sensor_status","sensor_capture");
 			$CONSTRAIN = "$table_name.user_id='$UID'";
@@ -71,13 +71,13 @@ if(DEBUG_MODE)
 
 			foreach($RESULT as $K=>$V){
 				echo '<tr align="center">';
-				echo "<td>$V['sensor_id']</td><td>$V['sensor_name']</td>";
+				echo "<td>$V[\"sensor_id\"]</td><td>$V[\"sensor_name\"]</td>";
 				
-				if($V['sensor_type'] == '1'){
-					echo "<td>$V['sensor_value']</td>";
+				if($V["sensor_type"] == '1'){
+					echo "<td>$V[\"sensor_value\"]</td>";
 				}
-				if($V['sensor_type'] == '2'){
-					if($V['sensor_status'] == '1'){
+				if($V["sensor_type"] == '2'){
+					if($V["sensor_status"] == '1'){
 						echo "<td>开</td>";
 					}else{
 						echo "<td>关</td>";
@@ -89,7 +89,7 @@ if(DEBUG_MODE)
 					echo "<br>$content<br>";
 				}
 				
-				echo "<td>$V['last_modified']<td>";
+				echo "<td>$V[\"last_modified\"]<td>";
 				echo '</tr>';
 			}
 			echo '</table>';
