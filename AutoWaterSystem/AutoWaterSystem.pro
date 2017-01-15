@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,9 +16,13 @@ PRECOMPILED_HEADER = stable.h
 QMAKE_CXX = ccache g++
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    PictureOperarion.cpp \
+    NetworkOperation.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    NetworkOperation.h \
+    PictureOperation.h
 
 FORMS    += mainwindow.ui
 

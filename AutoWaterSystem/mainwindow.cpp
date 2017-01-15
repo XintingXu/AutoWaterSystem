@@ -6,9 +6,20 @@
 #include <opencv2/core/core.hpp>
 #include <opencv2/opencv.hpp>
 #include <iostream>
+#include <QProcess>
+#include <QSemaphore>
+#include <PictureOperation.h>
+#include <wiringPi.h>
+
+bool RUNNING = true;//A very important value to judge whether the APP is running
+
+QSemaphore *PICapture,*USBCapture,*Qsemphere_login;//Semaphore used to constrain CSI-Camera ,USB-Camera and log-Activity
+QSemaphore *PICaptureDone,*USBCaptureDone;//Semaphore used to judge whether the capture process is done
 
 using namespace cv;
-using namespace std;
+
+cv::Mat capture1,capture2;//the shortcut of captured image
+cv::Mat capture_USB;//the image captured bu the USB device
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -17,9 +28,28 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     button = ui->pushButton;
     button_close = ui->pushButton_2;
+    textBrowser = ui->textBrowser;
+    label_capture1 = ui->label;
+    label_capture2 = ui->label_2;
+    textBrowser->document()->setMaximumBlockCount(50);
 
-    connect(button,SIGNAL(released()),this,SLOT(on_openButton_clicked()));
-    connect(button_close,SIGNAL(pressed()),this,SLOT(on_closeButton_clicked()));
+    connect(button,SIGNAL(released()),this,SLOT(openButton_clicked()));
+    connect(button_close,SIGNAL(pressed()),this,SLOT(closeButton_clicked()));
+    connect(&capturePI,SIGNAL(threadLog(QString)),this,SLOT(Log(QString)),Qt::QueuedConnection);
+    connect(&captureUSB,SIGNAL(threadLog(QString)),this,SLOT(Log(QString)),Qt::QueuedConnection);
+    connect(&srunLog,SIGNAL(threadLog(QString)),this,SLOT(Log(QString)),Qt::QueuedConnection);
+    connect(&capturePI,SIGNAL(showCapture()),this,SLOT(showCapture1()),Qt::QueuedConnection);
+    connect(&captureUSB,SIGNAL(showCapture()),this,SLOT(showCapture2()),Qt::QueuedConnection);
+
+    PICapture = new QSemaphore(0);
+    USBCapture = new QSemaphore(0);
+    Qsemphere_login = new QSemaphore(0);
+    PICaptureDone = new QSemaphore(0);
+    USBCaptureDone = new QSemaphore(0);
+
+    capturePI.start();
+    captureUSB.start();
+    srunLog.start();
 }
 
 MainWindow::~MainWindow()
@@ -27,25 +57,41 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_openButton_clicked()
+void MainWindow::openButton_clicked()
 {
-    VideoCapture videoCap;
-    videoCap.open(0);
-    if(!videoCap.isOpened()){
-        cout << "Cannot open camera" << endl;
-    }else{
-        videoCap.set(CV_CAP_PROP_FRAME_HEIGHT,360);
-        videoCap.set(CV_CAP_PROP_FRAME_WIDTH,640);
-        videoCap.set(CV_CAP_PROP_FPS,30);
-        Mat frame;
-        videoCap.read(frame);
-        cvtColor(frame,frame,CV_BGR2RGB);
-        ui->label->setPixmap(QPixmap::fromImage(QImage(frame.data,frame.cols,frame.rows,QImage::Format_RGB888)));
-        videoCap.release();
-    }
+    USBCapture->release(1);
+
+    PICapture->release(1);
 }
 
-void MainWindow::on_closeButton_clicked()
+void MainWindow::closeButton_clicked()
 {
+    RUNNING = false;
+
+    PICapture->release(1);
+    USBCapture->release(1);
+    Qsemphere_login->release(1);
+
+    capturePI.wait();
+    captureUSB.wait();
+    srunLog.wait();
+
     close();
+}
+
+void MainWindow::on_textBrowser_textChanged()
+{
+    ui->textBrowser->moveCursor(QTextCursor::End);
+}
+
+void MainWindow::Log(QString textMessage){
+    textBrowser->append(textMessage);
+}
+
+void MainWindow::showCapture1(){
+    label_capture1->setPixmap(QPixmap::fromImage(QImage(capture1.data,capture1.cols,capture2.rows,QImage::Format_RGB888)));
+}
+
+void MainWindow::showCapture2(){
+    label_capture2->setPixmap(QPixmap::fromImage(QImage(capture2.data,capture2.cols,capture2.rows,QImage::Format_RGB888)));
 }
