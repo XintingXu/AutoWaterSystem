@@ -31,6 +31,10 @@ CapturePI::~CapturePI(){
 void CapturePI::run(){
     while(RUNNING){
         PICapture->acquire(1);
+
+        if(!RUNNING)
+            break;
+
         poc->execute(cmdLine);
         capture1 = cv::imread("/home/pi/capture1.jpg");//load capture results
         cv::resize(capture1,capture1,cv::Size(128,96),0,0,cv::INTER_LINEAR);//resize the capture to be suitable for the UI
@@ -54,6 +58,9 @@ CaptureUSB::~CaptureUSB(){
 void CaptureUSB::run(){
     while(RUNNING){
         USBCapture->acquire(1);
+
+        if(!RUNNING)
+            break;
 
         if(!videoCap.isOpened()){
             emit threadLog(QString("VideoCapture is not opened."));

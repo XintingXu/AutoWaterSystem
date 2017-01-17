@@ -47,6 +47,22 @@ public:
     ThreadGET();
     ~ThreadGET();
     void run();
-}
+signals:
+    void threadLog(QString textMessage);
+};
+
+class ThreadUpdateSensor:public QThread{
+    Q_OBJECT
+private:
+    ThreadPOST * threadPOST;
+public:
+    QString data;
+    QUrl URL;
+    ThreadUpdateSensor();
+    ~ThreadUpdateSensor();
+    void run();
+signals:
+    void threadLog(QString textMessage);
+};
 
 #endif // NETWORKOPERATION_H

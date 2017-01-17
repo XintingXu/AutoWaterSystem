@@ -18,7 +18,7 @@ define('DATA_HOST_PASS','VliPhMbj4oCVv5B3');
 define('DATA_HOST_DBNAME','AutoWaterSystem');
 
 //定义应用的域名
-define('DOMAIN_NAME','www.xuxinting.cn/AutoWaterSystem');
+define('DOMAIN_NAME','10.108.11.123/AutoWaterSystem');
 
 //定义图片存储路径
 define('STO_PATH',"./upload/");
@@ -33,7 +33,7 @@ define('STO_USERPASS','');
 define('STO_USERID','');
 
 //是否显示错误信息
-define('DEBUG_MODE',true);
+define('DEBUG_MODE',false);
 
 //定义数据表的名
 define('NAME_OF_TABLE_USER','user_info');

@@ -18,11 +18,13 @@ QMAKE_CXX = ccache g++
 SOURCES += main.cpp\
         mainwindow.cpp \
     PictureOperarion.cpp \
-    NetworkOperation.cpp
+    NetworkOperation.cpp \
+    DeviceControl.cpp
 
 HEADERS  += mainwindow.h \
     NetworkOperation.h \
-    PictureOperation.h
+    PictureOperation.h \
+    DeviceControl.h
 
 FORMS    += mainwindow.ui
 

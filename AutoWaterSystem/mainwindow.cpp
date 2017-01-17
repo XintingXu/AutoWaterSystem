@@ -16,6 +16,10 @@ bool RUNNING = true;//A very important value to judge whether the APP is running
 QSemaphore *PICapture,*USBCapture,*Qsemphere_login;//Semaphore used to constrain CSI-Camera ,USB-Camera and log-Activity
 QSemaphore *PICaptureDone,*USBCaptureDone;//Semaphore used to judge whether the capture process is done
 
+QSemaphore * QSemaphore_openPump1,*QSemaphore_openPump2,*QSemaphore_openPump3,*QSemaphore_openPump4;
+
+bool PUMP1_open,PUMP2_open,PUMP3_open,PUMP4_open,KEY1_press,KEY2_press,LQ1_high,LQ2_high;
+
 using namespace cv;
 
 cv::Mat capture1,capture2;//the shortcut of captured image
@@ -25,6 +29,16 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    InitPins();
+    PUMP1_open = false;
+    PUMP2_open = false;
+    PUMP3_open = false;
+    PUMP4_open = false;
+    KEY1_press = false;
+    KEY2_press = false;
+    LQ1_high = true;
+    LQ2_high = true;
+
     ui->setupUi(this);
     button = ui->pushButton;
     button_close = ui->pushButton_2;
@@ -46,10 +60,46 @@ MainWindow::MainWindow(QWidget *parent) :
     Qsemphere_login = new QSemaphore(0);
     PICaptureDone = new QSemaphore(0);
     USBCaptureDone = new QSemaphore(0);
+    QSemaphore_openPump1 = new QSemaphore(0);
+    QSemaphore_openPump2 = new QSemaphore(0);
+    QSemaphore_openPump3 = new QSemaphore(0);
+    QSemaphore_openPump4 = new QSemaphore(0);
 
     capturePI.start();
     captureUSB.start();
     srunLog.start();
+}
+
+void MainWindow::InitPins(){
+    pinMode(PIN_CONTROL1,OUTPUT);
+    pinMode(PIN_CONTROL2,OUTPUT);
+    pinMode(PIN_CONTROL3,OUTPUT);
+    pinMode(PIN_CONTROL4,OUTPUT);
+
+    pinMode(PIN_TRAN1,OUTPUT);
+    pinMode(PIN_TRAN2,OUTPUT);
+    pinMode(PIN_TRAN3,OUTPUT);
+
+    pinMode(PIN_LQ1,INPUT);
+    pinMode(PIN_LQ2,INPUT);
+
+    pinMode(PIN_KEY1,INPUT);
+    pinMode(PIN_KEY2,INPUT);
+
+    digitalWrite(PIN_CONTROL1,HIGH);
+    digitalWrite(PIN_CONTROL2,HIGH);
+    digitalWrite(PIN_CONTROL3,HIGH);
+    digitalWrite(PIN_CONTROL4,HIGH);
+
+    digitalWrite(PIN_TRAN1,HIGH);
+    digitalWrite(PIN_TRAN2,HIGH);
+    digitalWrite(PIN_TRAN3,HIGH);
+
+    digitalWrite(PIN_LQ1,HIGH);
+    digitalWrite(PIN_LQ2,HIGH);
+
+    digitalWrite(PIN_KEY1,HIGH);
+    digitalWrite(PIN_KEY2,HIGH);
 }
 
 MainWindow::~MainWindow()

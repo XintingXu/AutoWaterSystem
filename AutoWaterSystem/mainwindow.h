@@ -15,6 +15,21 @@
 #include <NetworkOperation.h>
 #include <PictureOperation.h>
 
+#define PIN_CONTROL1 26
+#define PIN_CONTROL2 27
+#define PIN_CONTROL3 28
+#define PIN_CONTROL4 29
+
+#define PIN_TRAN1 23
+#define PIN_TRAN2 24
+#define PIN_TRAN3 25
+
+#define PIN_LQ1 21
+#define PIN_LQ2 22
+
+#define PIN_KEY1 1
+#define PIN_KEY2 4
+
 namespace Ui {
 class MainWindow;
 }
@@ -38,6 +53,7 @@ private slots:
     void on_textBrowser_textChanged();
 
 private:
+    void InitPins();
     Ui::MainWindow *ui;
     QPushButton *button;
     QPushButton *button_close;

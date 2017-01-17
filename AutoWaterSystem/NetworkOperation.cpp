@@ -27,6 +27,10 @@ SrunLogIn::~SrunLogIn(){
 void SrunLogIn::run(){
     while(RUNNING){
         Qsemphere_login->acquire(1);
+
+        if(!RUNNING)
+            break;
+
         QString info = "login.sh results : ";
         info.append(QString::number(poc->execute(curl)));//execute the .sh to complish curl function and show the curl result to the textBrowser
         emit threadLog(info);
@@ -44,4 +48,29 @@ void SrunLogIn::stopLog(){
             emit threadLog(ip);
         }
     }
+}
+
+
+ThreadGET::ThreadGET():QThread(){
+    request = new QNetworkRequest;
+}
+
+ThreadGET::~ThreadGET(){
+    delete(request);
+}
+
+void ThreadGET::run(){
+    ;
+}
+
+ThreadPOST::ThreadPOST():QThread(){
+    request = new QNetworkRequest;
+}
+
+ThreadPOST::~ThreadPOST(){
+    delete(request);
+}
+
+void ThreadPOST::run(){
+    ;
 }
