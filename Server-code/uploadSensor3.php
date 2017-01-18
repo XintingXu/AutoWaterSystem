@@ -17,8 +17,8 @@ else
 		$user_key = $_GET['user_key'];
 		$captute_img = $_GET['capture'];
 	}else{
-		$user_id = $_POST['user_id'];
-		$user_key = $_POST['user_key'];
+		$user_id = $_GET['user_id'];
+		$user_key = $_GET['user_key'];
 		//$content = $GLOBALS['HTTP_RAW_POST_DATA'];
 		$captute_img = isset($GLOBALS['HTTP_RAW_POST_DATA'])? $GLOBALS['HTTP_RAW_POST_DATA'] : '';
 		if(empty($captute_img)){
