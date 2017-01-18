@@ -16,7 +16,7 @@
 	UID		用户编号
 	TIME	返回日期
 	*/
-	function response_upload(int $result_number,string $sensor_id,string $user_id){
+	function response_upload($result_number,$sensor_id,$user_id){
 		$response_datetime = date("Y-m-d H:i:s");
 		
 		$res_array = array("RID"=>"$result_number","SID"=>"$sensor_id",
@@ -53,7 +53,7 @@
 		VALUE	数据值
 		TIME	数据上传日期
 	*/
-	function response_download(int $result_number,int $result_count,string $sensor_id,int $sensor_type,array $row_value_array){
+	function response_download($result_number,$result_count,$sensor_id,$sensor_type,$row_value_array){
 		$response_datetime = date("Y-m-d H:i:s");
 		
 		$response_download = array("RID"=>"$result_number","COUNT"=>"$result_count",
