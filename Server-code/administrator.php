@@ -130,7 +130,7 @@ $CSOP = $_GET['CSOP'];//开关的操作
 					}
 				}
 				if($sensor_type == '3'){
-					echo "<td><img src='data:img/jpg;base64,$sensor_capture'/></td>";
+					echo "<td><img src='$sensor_capture'/></td>";
 				}
 				if($sensor_type == '0'){
 					echo "<td>NULL</td>";

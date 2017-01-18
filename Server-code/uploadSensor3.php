@@ -25,7 +25,7 @@ else
 			$captute_img = file_get_contents('php://input');
 //		}
 
-		$captute_img = 'data:image/jpg;base64,'.chunk_split(base64_encode($capture_img));
+		$captute_img = 'data:image/jpg;base64,'.(string)chunk_split(base64_encode($captute_img));
 	}
 	
 	//状态返回值参数
