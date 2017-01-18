@@ -20,10 +20,10 @@ else
 		$user_id = $_GET['user_id'];
 		$user_key = $_GET['user_key'];
 		//$content = $GLOBALS['HTTP_RAW_POST_DATA'];
-		$captute_img = isset($GLOBALS['HTTP_RAW_POST_DATA'])? $GLOBALS['HTTP_RAW_POST_DATA'] : '';
-		if(empty($captute_img)){
+//		$captute_img = isset($GLOBALS['HTTP_RAW_POST_DATA'])? $GLOBALS['HTTP_RAW_POST_DATA'] : '';
+//		if(empty($captute_img)){
 			$captute_img = file_get_contents('php://input');
-		}
+//		}
 	}
 	
 	//状态返回值参数
