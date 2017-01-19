@@ -30,6 +30,8 @@ private:
 
 public:
     QUrl URL;
+    QString POSTData;
+    QSemaphore QSemaphore_post;
     ThreadPOST();
     ~ThreadPOST();
     void run();
@@ -44,22 +46,12 @@ private:
     QNetworkRequest *request;
 public:
     QUrl URL;
+    QString user_id;
+    QString user_key;
+
+    QSemaphore *QSemaphore_get;
     ThreadGET();
     ~ThreadGET();
-    void run();
-signals:
-    void threadLog(QString textMessage);
-};
-
-class ThreadUpdateSensor:public QThread{
-    Q_OBJECT
-private:
-    ThreadPOST * threadPOST;
-public:
-    QString data;
-    QUrl URL;
-    ThreadUpdateSensor();
-    ~ThreadUpdateSensor();
     void run();
 signals:
     void threadLog(QString textMessage);

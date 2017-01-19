@@ -20,7 +20,7 @@ extern bool RUNNING;
 
 CapturePI::CapturePI():QThread(){
     //call the raspistill to capture picture through PI camera
-    cmdLine = "raspistill -w 960 -h 720 -e jpg -ex auto -ifx denoise -o /home/pi/capture1.jpg -n -t 1000";
+    cmdLine = "raspistill -w 640 -h 480 -e jpg -ex auto -ifx denoise -o /home/pi/capture1.jpg -n -t 1000";
     poc = new QProcess;
 }
 
@@ -32,8 +32,10 @@ void CapturePI::run(){
     while(RUNNING){
         PICapture->acquire(1);
 
-        if(!RUNNING)
+        if(!RUNNING){
+            PICaptureDone->release(1);
             break;
+        }
 
         poc->execute(cmdLine);
         capture1 = cv::imread("/home/pi/capture1.jpg");//load capture results
@@ -45,27 +47,31 @@ void CapturePI::run(){
 }
 
 CaptureUSB::CaptureUSB():QThread(){//open usb camera and set capture info
-    videoCap.open(1);
-    videoCap.set(CV_CAP_PROP_FRAME_HEIGHT,720);
-    videoCap.set(CV_CAP_PROP_FRAME_WIDTH,960);
-    videoCap.set(CV_CAP_PROP_FPS,30);
+    poc = new QProcess();
 }
 
 CaptureUSB::~CaptureUSB(){
-    videoCap.release();
+    delete(poc);
 }
 
 void CaptureUSB::run(){
     while(RUNNING){
         USBCapture->acquire(1);
 
-        if(!RUNNING)
+        if(!RUNNING){
+            USBCaptureDone->release(1);
             break;
+        }
 
-        if(!videoCap.isOpened()){
+        videoCap = cvCreateCameraCapture(1);
+        cvSetCaptureProperty(videoCap,CV_CAP_PROP_FRAME_HEIGHT,480);
+        cvSetCaptureProperty(videoCap,CV_CAP_PROP_FRAME_WIDTH,640);
+
+        if(!videoCap){
             emit threadLog(QString("VideoCapture is not opened."));
         }else{
-            videoCap.read(capture_USB);
+            frame = cvQueryFrame(videoCap);
+            capture_USB = Mat(frame);
             cv::imwrite("/home/pi/capture2.jpg",capture_USB);//store the captured picture to the path
             cv::resize(capture_USB,capture2,cv::Size(128,96),0,0,cv::INTER_LINEAR);
             cv::cvtColor(capture2,capture2,CV_BGR2RGB);
@@ -73,5 +79,7 @@ void CaptureUSB::run(){
             emit threadLog(QString("USB Capture capture2.jpg"));
             emit showCapture();
         }
+        cvReleaseCapture(&videoCap);
+        cvReleaseImage(&frame);
     }
 }

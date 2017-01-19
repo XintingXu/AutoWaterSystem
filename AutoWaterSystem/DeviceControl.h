@@ -7,18 +7,18 @@
 
 extern bool RUNNING;
 
-extern QSemaphore QSemaphore_openPump1;
-extern QSemaphore QSemaphore_openPump2;
-extern QSemaphore QSemaphore_openPump3;
-extern QSemaphore QSemaphore_openPump4;
+extern QSemaphore *QSemaphore_openPump1;
+extern QSemaphore *QSemaphore_openPump2;
+extern QSemaphore *QSemaphore_openPump3;
+extern QSemaphore *QSemaphore_openPump4;
 
 extern bool PUMP1_open,PUMP2_open,PUMP3_open,PUMP4_open,KEY1_press,KEY2_press,LQ1_high,LQ2_high;
 
 class ThreadControlPump1:public QThread{
     Q_OBJECT
 private:
-    open();
-    close();
+    void open();
+    void close();
 
 public:
     ThreadControlPump1();
@@ -34,8 +34,8 @@ signals:
 class ThreadControlPump2:public QThread{
     Q_OBJECT
 private:
-    open();
-    close();
+    void open();
+    void close();
 
 public:
     ThreadControlPump2();
@@ -50,8 +50,8 @@ signals:
 class ThreadControlPump3:public QThread{
     Q_OBJECT
 private:
-    open();
-    close();
+    void open();
+    void close();
 
 public:
     ThreadControlPump3();
@@ -66,8 +66,8 @@ signals:
 class ThreadControlPump4:public QThread{
     Q_OBJECT
 private:
-    open();
-    close();
+    void open();
+    void close();
 
 public:
     ThreadControlPump4();

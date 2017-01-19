@@ -36,6 +36,11 @@ public:
     QLabel *label;
     QTextBrowser *textBrowser;
     QLabel *label_2;
+    QPushButton *pushButton_3;
+    QPushButton *pushButton_4;
+    QPushButton *pushButton_5;
+    QPushButton *pushButton_6;
+    QPushButton *pushButton_7;
     QMenuBar *menuBar;
     QMenu *menuAutoWaterSystem;
     QToolBar *mainToolBar;
@@ -53,7 +58,7 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(380, 0, 101, 31));
+        pushButton->setGeometry(QRect(290, 10, 71, 21));
         pushButton_2 = new QPushButton(centralWidget);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
         pushButton_2->setGeometry(QRect(380, 220, 101, 31));
@@ -70,6 +75,21 @@ public:
         label_2 = new QLabel(centralWidget);
         label_2->setObjectName(QStringLiteral("label_2"));
         label_2->setGeometry(QRect(150, 0, 128, 96));
+        pushButton_3 = new QPushButton(centralWidget);
+        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
+        pushButton_3->setGeometry(QRect(290, 60, 71, 21));
+        pushButton_4 = new QPushButton(centralWidget);
+        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
+        pushButton_4->setGeometry(QRect(380, 10, 101, 31));
+        pushButton_5 = new QPushButton(centralWidget);
+        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
+        pushButton_5->setGeometry(QRect(380, 60, 101, 31));
+        pushButton_6 = new QPushButton(centralWidget);
+        pushButton_6->setObjectName(QStringLiteral("pushButton_6"));
+        pushButton_6->setGeometry(QRect(380, 110, 101, 31));
+        pushButton_7 = new QPushButton(centralWidget);
+        pushButton_7->setObjectName(QStringLiteral("pushButton_7"));
+        pushButton_7->setGeometry(QRect(380, 160, 101, 31));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -96,10 +116,15 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
         actionAbout->setText(QApplication::translate("MainWindow", "About", 0));
-        pushButton->setText(QApplication::translate("MainWindow", "Capture", 0));
+        pushButton->setText(QApplication::translate("MainWindow", "Capture1", 0));
         pushButton_2->setText(QApplication::translate("MainWindow", "Quit", 0));
         label->setText(QString());
         label_2->setText(QString());
+        pushButton_3->setText(QApplication::translate("MainWindow", "Capture2", 0));
+        pushButton_4->setText(QApplication::translate("MainWindow", "PUMP1", 0));
+        pushButton_5->setText(QApplication::translate("MainWindow", "PUMP2", 0));
+        pushButton_6->setText(QApplication::translate("MainWindow", "PUMP3", 0));
+        pushButton_7->setText(QApplication::translate("MainWindow", "PUMP4", 0));
         menuAutoWaterSystem->setTitle(QApplication::translate("MainWindow", "AutoWaterSystem", 0));
     } // retranslateUi
 

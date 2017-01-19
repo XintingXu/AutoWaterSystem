@@ -50,11 +50,11 @@ else
 	$sensor_type = 0;
 	
 	if(DEBUG_MODE){
-		$user_id = $_GET['user_id'];
-		$user_pass = $_GET['user_pass'];
+		$user_id = $_GET["user_id"];
+		$user_pass = $_GET["user_pass"];
 	}else{
-		$user_id = $_POST['user_id'];
-		$user_pass = $_POST['user_pass'];
+		$user_id = $_POST["user_id"];
+		$user_pass = $_POST["user_pass"];
 	}
 	
 	$result_number = 0;
@@ -107,7 +107,7 @@ else
 					if($data_count <= '1'){
 						$ROWS = array("sensor_status");
 						$CONSTRAIN = "$table_sensor.sensor_id='$sensor_id'";
-						$table_name = $table_log;
+						$table_name = $table_sensor;
 					}
 					else{
 						$ROWS = array("sensor_value","log_datetime");

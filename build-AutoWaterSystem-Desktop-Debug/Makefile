@@ -14,11 +14,11 @@ CC            = gcc
 CXX           = ccache g++
 DEFINES       = -DQT_WIDGETS_LIB -DQT_NETWORK_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
-CXXFLAGS      = -pipe -g -Wall -W -D_REENTRANT -fPIE $(DEFINES)
+CXXFLAGS      = -pipe -g -std=c++0x -Wall -W -D_REENTRANT -fPIE $(DEFINES)
 INCPATH       = -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I../AutoWaterSystem -isystem /usr/include/arm-linux-gnueabihf/qt5 -isystem /usr/include/arm-linux-gnueabihf/qt5/QtWidgets -isystem /usr/include/arm-linux-gnueabihf/qt5/QtNetwork -isystem /usr/include/arm-linux-gnueabihf/qt5/QtGui -isystem /usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I. -I.
 LINK          = g++
 LFLAGS        = 
-LIBS          = $(SUBLIBS) /usr/lib/arm-linux-gnueabihf/libopencv_highgui.so /usr/lib/arm-linux-gnueabihf/libopencv_core.so /usr/lib/arm-linux-gnueabihf/libopencv_imgproc.so -lQt5Widgets -lQt5Network -lQt5Gui -lQt5Core -lGLESv2 -lpthread 
+LIBS          = $(SUBLIBS) /usr/lib/arm-linux-gnueabihf/libopencv_highgui.so /usr/lib/arm-linux-gnueabihf/libopencv_core.so /usr/lib/arm-linux-gnueabihf/libopencv_imgproc.so -lwiringPi -lQt5Widgets -lQt5Network -lQt5Gui -lQt5Core -lGLESv2 -lpthread 
 AR            = ar cqs
 RANLIB        = 
 QMAKE         = /usr/lib/arm-linux-gnueabihf/qt5/bin/qmake
@@ -48,16 +48,28 @@ OBJECTS_DIR   = ./
 SOURCES       = ../AutoWaterSystem/main.cpp \
 		../AutoWaterSystem/mainwindow.cpp \
 		../AutoWaterSystem/PictureOperarion.cpp \
-		../AutoWaterSystem/NetworkOperation.cpp moc_mainwindow.cpp \
+		../AutoWaterSystem/NetworkOperation.cpp \
+		../AutoWaterSystem/DeviceControl.cpp \
+		../AutoWaterSystem/getSensorInformation.cpp \
+		../AutoWaterSystem/uploadSensorInformation.cpp moc_mainwindow.cpp \
 		moc_NetworkOperation.cpp \
-		moc_PictureOperation.cpp
+		moc_PictureOperation.cpp \
+		moc_DeviceControl.cpp \
+		moc_getSensorInformation.cpp \
+		moc_uploadSensorInformation.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		PictureOperarion.o \
 		NetworkOperation.o \
+		DeviceControl.o \
+		getSensorInformation.o \
+		uploadSensorInformation.o \
 		moc_mainwindow.o \
 		moc_NetworkOperation.o \
-		moc_PictureOperation.o
+		moc_PictureOperation.o \
+		moc_DeviceControl.o \
+		moc_getSensorInformation.o \
+		moc_uploadSensorInformation.o
 DIST          = /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/common/shell-unix.conf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/common/unix.conf \
@@ -101,6 +113,7 @@ DIST          = /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/default_pre.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/resolve_config.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/default_post.prf \
+		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/c++11.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/warn_on.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/qt.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/resources.prf \
@@ -115,7 +128,10 @@ DIST          = /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/spec_pre.prf \
 		../AutoWaterSystem/AutoWaterSystem.pro ../AutoWaterSystem/main.cpp \
 		../AutoWaterSystem/mainwindow.cpp \
 		../AutoWaterSystem/PictureOperarion.cpp \
-		../AutoWaterSystem/NetworkOperation.cpp
+		../AutoWaterSystem/NetworkOperation.cpp \
+		../AutoWaterSystem/DeviceControl.cpp \
+		../AutoWaterSystem/getSensorInformation.cpp \
+		../AutoWaterSystem/uploadSensorInformation.cpp
 QMAKE_TARGET  = AutoWaterSystem
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = AutoWaterSystem
@@ -191,6 +207,7 @@ Makefile: ../AutoWaterSystem/AutoWaterSystem.pro /usr/lib/arm-linux-gnueabihf/qt
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/default_pre.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/resolve_config.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/default_post.prf \
+		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/c++11.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/warn_on.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/qt.prf \
 		/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/resources.prf \
@@ -251,6 +268,7 @@ Makefile: ../AutoWaterSystem/AutoWaterSystem.pro /usr/lib/arm-linux-gnueabihf/qt
 /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/default_pre.prf:
 /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/resolve_config.prf:
 /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/default_post.prf:
+/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/c++11.prf:
 /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/warn_on.prf:
 /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/qt.prf:
 /usr/lib/arm-linux-gnueabihf/qt5/mkspecs/features/resources.prf:
@@ -274,7 +292,7 @@ qmake_all: FORCE
 
 dist: 
 	@test -d .tmp/AutoWaterSystem1.0.0 || mkdir -p .tmp/AutoWaterSystem1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/AutoWaterSystem1.0.0/ && $(COPY_FILE) --parents ../AutoWaterSystem/mainwindow.h ../AutoWaterSystem/NetworkOperation.h ../AutoWaterSystem/PictureOperation.h .tmp/AutoWaterSystem1.0.0/ && $(COPY_FILE) --parents ../AutoWaterSystem/main.cpp ../AutoWaterSystem/mainwindow.cpp ../AutoWaterSystem/PictureOperarion.cpp ../AutoWaterSystem/NetworkOperation.cpp .tmp/AutoWaterSystem1.0.0/ && $(COPY_FILE) --parents ../AutoWaterSystem/mainwindow.ui .tmp/AutoWaterSystem1.0.0/ && (cd `dirname .tmp/AutoWaterSystem1.0.0` && $(TAR) AutoWaterSystem1.0.0.tar AutoWaterSystem1.0.0 && $(COMPRESS) AutoWaterSystem1.0.0.tar) && $(MOVE) `dirname .tmp/AutoWaterSystem1.0.0`/AutoWaterSystem1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/AutoWaterSystem1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/AutoWaterSystem1.0.0/ && $(COPY_FILE) --parents ../AutoWaterSystem/mainwindow.h ../AutoWaterSystem/NetworkOperation.h ../AutoWaterSystem/PictureOperation.h ../AutoWaterSystem/DeviceControl.h ../AutoWaterSystem/getSensorInformation.h ../AutoWaterSystem/uploadSensorInformation.h .tmp/AutoWaterSystem1.0.0/ && $(COPY_FILE) --parents ../AutoWaterSystem/main.cpp ../AutoWaterSystem/mainwindow.cpp ../AutoWaterSystem/PictureOperarion.cpp ../AutoWaterSystem/NetworkOperation.cpp ../AutoWaterSystem/DeviceControl.cpp ../AutoWaterSystem/getSensorInformation.cpp ../AutoWaterSystem/uploadSensorInformation.cpp .tmp/AutoWaterSystem1.0.0/ && $(COPY_FILE) --parents ../AutoWaterSystem/mainwindow.ui .tmp/AutoWaterSystem1.0.0/ && (cd `dirname .tmp/AutoWaterSystem1.0.0` && $(TAR) AutoWaterSystem1.0.0.tar AutoWaterSystem1.0.0 && $(COMPRESS) AutoWaterSystem1.0.0.tar) && $(MOVE) `dirname .tmp/AutoWaterSystem1.0.0`/AutoWaterSystem1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/AutoWaterSystem1.0.0
 
 
 clean:compiler_clean 
@@ -297,11 +315,14 @@ check: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_NetworkOperation.cpp moc_PictureOperation.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_NetworkOperation.cpp moc_PictureOperation.cpp moc_DeviceControl.cpp moc_getSensorInformation.cpp moc_uploadSensorInformation.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_NetworkOperation.cpp moc_PictureOperation.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_NetworkOperation.cpp moc_PictureOperation.cpp moc_DeviceControl.cpp moc_getSensorInformation.cpp moc_uploadSensorInformation.cpp
 moc_mainwindow.cpp: ../AutoWaterSystem/NetworkOperation.h \
 		../AutoWaterSystem/PictureOperation.h \
+		../AutoWaterSystem/DeviceControl.h \
+		../AutoWaterSystem/uploadSensorInformation.h \
+		../AutoWaterSystem/getSensorInformation.h \
 		../AutoWaterSystem/mainwindow.h
 	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/AutoWaterSystem/AutoWaterSystem -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../AutoWaterSystem/mainwindow.h -o moc_mainwindow.cpp
 
@@ -310,6 +331,15 @@ moc_NetworkOperation.cpp: ../AutoWaterSystem/NetworkOperation.h
 
 moc_PictureOperation.cpp: ../AutoWaterSystem/PictureOperation.h
 	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/AutoWaterSystem/AutoWaterSystem -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../AutoWaterSystem/PictureOperation.h -o moc_PictureOperation.cpp
+
+moc_DeviceControl.cpp: ../AutoWaterSystem/DeviceControl.h
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/AutoWaterSystem/AutoWaterSystem -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../AutoWaterSystem/DeviceControl.h -o moc_DeviceControl.cpp
+
+moc_getSensorInformation.cpp: ../AutoWaterSystem/getSensorInformation.h
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/AutoWaterSystem/AutoWaterSystem -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../AutoWaterSystem/getSensorInformation.h -o moc_getSensorInformation.cpp
+
+moc_uploadSensorInformation.cpp: ../AutoWaterSystem/uploadSensorInformation.h
+	/usr/lib/arm-linux-gnueabihf/qt5/bin/moc $(DEFINES) -I/usr/lib/arm-linux-gnueabihf/qt5/mkspecs/linux-g++ -I/home/pi/AutoWaterSystem/AutoWaterSystem -I/usr/include/arm-linux-gnueabihf/qt5 -I/usr/include/arm-linux-gnueabihf/qt5/QtWidgets -I/usr/include/arm-linux-gnueabihf/qt5/QtNetwork -I/usr/include/arm-linux-gnueabihf/qt5/QtGui -I/usr/include/arm-linux-gnueabihf/qt5/QtCore -I. -I/usr/include/c++/4.9 -I/usr/include/arm-linux-gnueabihf/c++/4.9 -I/usr/include/c++/4.9/backward -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include -I/usr/local/include -I/usr/lib/gcc/arm-linux-gnueabihf/4.9/include-fixed -I/usr/include/arm-linux-gnueabihf -I/usr/include ../AutoWaterSystem/uploadSensorInformation.h -o moc_uploadSensorInformation.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -331,12 +361,18 @@ compiler_clean: compiler_moc_header_clean compiler_uic_clean
 
 main.o: ../AutoWaterSystem/main.cpp ../AutoWaterSystem/mainwindow.h \
 		../AutoWaterSystem/NetworkOperation.h \
-		../AutoWaterSystem/PictureOperation.h
+		../AutoWaterSystem/PictureOperation.h \
+		../AutoWaterSystem/DeviceControl.h \
+		../AutoWaterSystem/uploadSensorInformation.h \
+		../AutoWaterSystem/getSensorInformation.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../AutoWaterSystem/main.cpp
 
 mainwindow.o: ../AutoWaterSystem/mainwindow.cpp ../AutoWaterSystem/mainwindow.h \
 		../AutoWaterSystem/NetworkOperation.h \
 		../AutoWaterSystem/PictureOperation.h \
+		../AutoWaterSystem/DeviceControl.h \
+		../AutoWaterSystem/uploadSensorInformation.h \
+		../AutoWaterSystem/getSensorInformation.h \
 		ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../AutoWaterSystem/mainwindow.cpp
 
@@ -346,6 +382,20 @@ PictureOperarion.o: ../AutoWaterSystem/PictureOperarion.cpp ../AutoWaterSystem/P
 NetworkOperation.o: ../AutoWaterSystem/NetworkOperation.cpp ../AutoWaterSystem/NetworkOperation.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o NetworkOperation.o ../AutoWaterSystem/NetworkOperation.cpp
 
+DeviceControl.o: ../AutoWaterSystem/DeviceControl.cpp ../AutoWaterSystem/DeviceControl.h \
+		../AutoWaterSystem/mainwindow.h \
+		../AutoWaterSystem/NetworkOperation.h \
+		../AutoWaterSystem/PictureOperation.h \
+		../AutoWaterSystem/uploadSensorInformation.h \
+		../AutoWaterSystem/getSensorInformation.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o DeviceControl.o ../AutoWaterSystem/DeviceControl.cpp
+
+getSensorInformation.o: ../AutoWaterSystem/getSensorInformation.cpp ../AutoWaterSystem/getSensorInformation.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o getSensorInformation.o ../AutoWaterSystem/getSensorInformation.cpp
+
+uploadSensorInformation.o: ../AutoWaterSystem/uploadSensorInformation.cpp ../AutoWaterSystem/uploadSensorInformation.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o uploadSensorInformation.o ../AutoWaterSystem/uploadSensorInformation.cpp
+
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
 
@@ -354,6 +404,15 @@ moc_NetworkOperation.o: moc_NetworkOperation.cpp
 
 moc_PictureOperation.o: moc_PictureOperation.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_PictureOperation.o moc_PictureOperation.cpp
+
+moc_DeviceControl.o: moc_DeviceControl.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_DeviceControl.o moc_DeviceControl.cpp
+
+moc_getSensorInformation.o: moc_getSensorInformation.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_getSensorInformation.o moc_getSensorInformation.cpp
+
+moc_uploadSensorInformation.o: moc_uploadSensorInformation.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_uploadSensorInformation.o moc_uploadSensorInformation.cpp
 
 ####### Install
 

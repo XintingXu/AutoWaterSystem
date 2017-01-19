@@ -12,6 +12,8 @@
 #include <QSemaphore>
 #include <QTextBrowser>
 
+using namespace cv;
+
 extern QSemaphore * PICapture,*PICaptureDone;
 extern QSemaphore *USBCapture,*USBCaptureDone;
 
@@ -36,7 +38,9 @@ public:
 class CaptureUSB : public QThread{
     Q_OBJECT
 private:
-    cv::VideoCapture videoCap;
+    CvCapture *videoCap;
+    IplImage *frame;
+    QProcess *poc;
 
 signals:
     void threadLog(QString textMessage);

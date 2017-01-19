@@ -72,5 +72,12 @@ ThreadPOST::~ThreadPOST(){
 }
 
 void ThreadPOST::run(){
-    ;
+    while(RUNNING){
+        QSemaphore_post.acquire(1);
+
+        if(!RUNNING)
+            break;
+
+        request->setUrl(URL);
+    }
 }
