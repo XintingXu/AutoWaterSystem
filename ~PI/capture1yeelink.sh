@@ -1,0 +1,3 @@
+curl --request POST --data-binary @"/home/pi/capture1.jpg" --header "U-ApiKey:372ff6f73d10b192449d1c95dbaecff0" http://api.yeelink.net/v1.1/device/353664/sensor/398910/photos
+curl --request POST --data-binary @"/home/pi/capture_close.txt" --header "U-ApiKey:372ff6f73d10b192449d1c95dbaecff0" http://api.yeelink.net/v1.1/device/353664/sensor/399676/photos
+curl --request POST -d "user_id=100000000&user_key=f74507c134112393eb32fb9dc319064b7e0a03d0" "http://localhost/AutoWaterSystem/uploadSensor2.php?sensor_id=200000005&sensor_status=0"

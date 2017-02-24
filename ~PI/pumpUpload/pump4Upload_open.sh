@@ -1,0 +1,2 @@
+curl --request POST --data-binary @"/home/pi/pumpUpload/pump_open.txt" --header "U-ApiKey:372ff6f73d10b192449d1c95dbaecff0" http://api.yeelink.net/v1.1/device/353664/sensor/398909/datapoints
+curl --request POST -d "user_id=100000000&user_key=f74507c134112393eb32fb9dc319064b7e0a03d0" "http://localhost/AutoWaterSystem/uploadSensor2.php?sensor_id=200000004&sensor_status=1"

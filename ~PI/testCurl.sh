@@ -1,0 +1,1 @@
+curl --request POST -d 'user_id=100000000&user_pass=f74507c134112393eb32fb9dc319064b7e0a03d0' "http://localhost/AutoWaterSystem/downloadSensor12.php?sensor_id=200000001&data_count=1&start_position=1&user_id=100000000&user_pass=f74507c134112393eb32fb9dc319064b7e0a03d0"
